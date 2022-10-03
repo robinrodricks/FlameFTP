@@ -60,13 +60,13 @@
 			this.label13 = new System.Windows.Forms.Label();
 			this.label15 = new System.Windows.Forms.Label();
 			this.PanelProfile = new System.Windows.Forms.Panel();
+			this.label17 = new System.Windows.Forms.Label();
 			this.iconPictureBox6 = new FontAwesome.Sharp.IconPictureBox();
 			this.iconPictureBox5 = new FontAwesome.Sharp.IconPictureBox();
 			this.iconPictureBox4 = new FontAwesome.Sharp.IconPictureBox();
 			this.iconPictureBox3 = new FontAwesome.Sharp.IconPictureBox();
 			this.iconPictureBox2 = new FontAwesome.Sharp.IconPictureBox();
 			this.iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
-			this.label17 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.NumPort)).BeginInit();
 			this.GrpManual.SuspendLayout();
 			this.PanelProfile.SuspendLayout();
@@ -137,7 +137,7 @@
 			// 
 			// TxtDisplayName
 			// 
-			this.TxtDisplayName.Location = new System.Drawing.Point(131, 10);
+			this.TxtDisplayName.Location = new System.Drawing.Point(137, 10);
 			this.TxtDisplayName.Margin = new System.Windows.Forms.Padding(2);
 			this.TxtDisplayName.MaxLength = 1000;
 			this.TxtDisplayName.Name = "TxtDisplayName";
@@ -147,7 +147,7 @@
 			// label6
 			// 
 			this.label6.AutoSize = true;
-			this.label6.Location = new System.Drawing.Point(42, 13);
+			this.label6.Location = new System.Drawing.Point(48, 13);
 			this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.label6.Name = "label6";
 			this.label6.Size = new System.Drawing.Size(80, 15);
@@ -157,7 +157,7 @@
 			// label4
 			// 
 			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(42, 209);
+			this.label4.Location = new System.Drawing.Point(48, 209);
 			this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(29, 15);
@@ -167,7 +167,7 @@
 			// label5
 			// 
 			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(42, 67);
+			this.label5.Location = new System.Drawing.Point(48, 67);
 			this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(67, 15);
@@ -222,7 +222,7 @@
 			// 
 			// NumPort
 			// 
-			this.NumPort.Location = new System.Drawing.Point(131, 202);
+			this.NumPort.Location = new System.Drawing.Point(137, 202);
 			this.NumPort.Name = "NumPort";
 			this.NumPort.Size = new System.Drawing.Size(120, 23);
 			this.NumPort.TabIndex = 22;
@@ -231,7 +231,7 @@
 			// 
 			this.label11.AutoSize = true;
 			this.label11.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-			this.label11.Location = new System.Drawing.Point(130, 36);
+			this.label11.Location = new System.Drawing.Point(136, 36);
 			this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.label11.Name = "label11";
 			this.label11.Size = new System.Drawing.Size(253, 15);
@@ -242,7 +242,7 @@
 			// 
 			this.label2.AutoSize = true;
 			this.label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-			this.label2.Location = new System.Drawing.Point(130, 89);
+			this.label2.Location = new System.Drawing.Point(136, 89);
 			this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(185, 15);
@@ -251,7 +251,7 @@
 			// 
 			// TxtHost
 			// 
-			this.TxtHost.Location = new System.Drawing.Point(131, 63);
+			this.TxtHost.Location = new System.Drawing.Point(137, 63);
 			this.TxtHost.Margin = new System.Windows.Forms.Padding(2);
 			this.TxtHost.MaxLength = 1000;
 			this.TxtHost.Name = "TxtHost";
@@ -262,7 +262,7 @@
 			// 
 			this.label3.AutoSize = true;
 			this.label3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-			this.label3.Location = new System.Drawing.Point(130, 228);
+			this.label3.Location = new System.Drawing.Point(136, 228);
 			this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(256, 15);
@@ -272,7 +272,7 @@
 			// CbAuto
 			// 
 			this.CbAuto.AutoSize = true;
-			this.CbAuto.Location = new System.Drawing.Point(131, 264);
+			this.CbAuto.Location = new System.Drawing.Point(137, 264);
 			this.CbAuto.Name = "CbAuto";
 			this.CbAuto.Size = new System.Drawing.Size(100, 19);
 			this.CbAuto.TabIndex = 27;
@@ -292,7 +292,7 @@
 			this.GrpManual.Controls.Add(this.CbDataConn);
 			this.GrpManual.Controls.Add(this.CbSecureProtocol);
 			this.GrpManual.Controls.Add(this.CbProtocol);
-			this.GrpManual.Location = new System.Drawing.Point(45, 326);
+			this.GrpManual.Location = new System.Drawing.Point(51, 326);
 			this.GrpManual.Name = "GrpManual";
 			this.GrpManual.Size = new System.Drawing.Size(353, 189);
 			this.GrpManual.TabIndex = 28;
@@ -340,7 +340,7 @@
 			// label12
 			// 
 			this.label12.AutoSize = true;
-			this.label12.Location = new System.Drawing.Point(42, 264);
+			this.label12.Location = new System.Drawing.Point(48, 264);
 			this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.label12.Name = "label12";
 			this.label12.Size = new System.Drawing.Size(49, 15);
@@ -383,7 +383,7 @@
 			// 
 			// TxtUser
 			// 
-			this.TxtUser.Location = new System.Drawing.Point(131, 118);
+			this.TxtUser.Location = new System.Drawing.Point(137, 118);
 			this.TxtUser.Margin = new System.Windows.Forms.Padding(2);
 			this.TxtUser.MaxLength = 1000;
 			this.TxtUser.Name = "TxtUser";
@@ -393,7 +393,7 @@
 			// label14
 			// 
 			this.label14.AutoSize = true;
-			this.label14.Location = new System.Drawing.Point(42, 122);
+			this.label14.Location = new System.Drawing.Point(48, 122);
 			this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.label14.Name = "label14";
 			this.label14.Size = new System.Drawing.Size(65, 15);
@@ -402,7 +402,7 @@
 			// 
 			// TxtPass
 			// 
-			this.TxtPass.Location = new System.Drawing.Point(131, 145);
+			this.TxtPass.Location = new System.Drawing.Point(137, 145);
 			this.TxtPass.Margin = new System.Windows.Forms.Padding(2);
 			this.TxtPass.MaxLength = 1000;
 			this.TxtPass.Name = "TxtPass";
@@ -413,7 +413,7 @@
 			// label13
 			// 
 			this.label13.AutoSize = true;
-			this.label13.Location = new System.Drawing.Point(42, 149);
+			this.label13.Location = new System.Drawing.Point(48, 149);
 			this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.label13.Name = "label13";
 			this.label13.Size = new System.Drawing.Size(57, 15);
@@ -424,7 +424,7 @@
 			// 
 			this.label15.AutoSize = true;
 			this.label15.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-			this.label15.Location = new System.Drawing.Point(128, 173);
+			this.label15.Location = new System.Drawing.Point(134, 173);
 			this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.label15.Name = "label15";
 			this.label15.Size = new System.Drawing.Size(124, 15);
@@ -466,6 +466,17 @@
 			this.PanelProfile.Size = new System.Drawing.Size(421, 539);
 			this.PanelProfile.TabIndex = 37;
 			// 
+			// label17
+			// 
+			this.label17.AutoSize = true;
+			this.label17.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+			this.label17.Location = new System.Drawing.Point(134, 286);
+			this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.label17.Name = "label17";
+			this.label17.Size = new System.Drawing.Size(227, 15);
+			this.label17.TabIndex = 43;
+			this.label17.Text = "Automatically detect connection settings.";
+			// 
 			// iconPictureBox6
 			// 
 			this.iconPictureBox6.BackColor = System.Drawing.SystemColors.Control;
@@ -474,7 +485,7 @@
 			this.iconPictureBox6.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(11)))), ((int)(((byte)(255)))));
 			this.iconPictureBox6.IconFont = FontAwesome.Sharp.IconFont.Solid;
 			this.iconPictureBox6.IconSize = 30;
-			this.iconPictureBox6.Location = new System.Drawing.Point(13, 259);
+			this.iconPictureBox6.Location = new System.Drawing.Point(15, 259);
 			this.iconPictureBox6.Name = "iconPictureBox6";
 			this.iconPictureBox6.Size = new System.Drawing.Size(30, 30);
 			this.iconPictureBox6.TabIndex = 42;
@@ -488,7 +499,7 @@
 			this.iconPictureBox5.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(11)))), ((int)(((byte)(255)))));
 			this.iconPictureBox5.IconFont = FontAwesome.Sharp.IconFont.Solid;
 			this.iconPictureBox5.IconSize = 30;
-			this.iconPictureBox5.Location = new System.Drawing.Point(13, 203);
+			this.iconPictureBox5.Location = new System.Drawing.Point(15, 203);
 			this.iconPictureBox5.Name = "iconPictureBox5";
 			this.iconPictureBox5.Size = new System.Drawing.Size(30, 30);
 			this.iconPictureBox5.TabIndex = 41;
@@ -502,7 +513,7 @@
 			this.iconPictureBox4.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(11)))), ((int)(((byte)(255)))));
 			this.iconPictureBox4.IconFont = FontAwesome.Sharp.IconFont.Solid;
 			this.iconPictureBox4.IconSize = 30;
-			this.iconPictureBox4.Location = new System.Drawing.Point(13, 117);
+			this.iconPictureBox4.Location = new System.Drawing.Point(15, 117);
 			this.iconPictureBox4.Name = "iconPictureBox4";
 			this.iconPictureBox4.Size = new System.Drawing.Size(30, 30);
 			this.iconPictureBox4.TabIndex = 40;
@@ -516,7 +527,7 @@
 			this.iconPictureBox3.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(11)))), ((int)(((byte)(255)))));
 			this.iconPictureBox3.IconFont = FontAwesome.Sharp.IconFont.Solid;
 			this.iconPictureBox3.IconSize = 30;
-			this.iconPictureBox3.Location = new System.Drawing.Point(13, 330);
+			this.iconPictureBox3.Location = new System.Drawing.Point(15, 330);
 			this.iconPictureBox3.Name = "iconPictureBox3";
 			this.iconPictureBox3.Size = new System.Drawing.Size(30, 30);
 			this.iconPictureBox3.TabIndex = 39;
@@ -530,7 +541,7 @@
 			this.iconPictureBox2.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(11)))), ((int)(((byte)(255)))));
 			this.iconPictureBox2.IconFont = FontAwesome.Sharp.IconFont.Solid;
 			this.iconPictureBox2.IconSize = 30;
-			this.iconPictureBox2.Location = new System.Drawing.Point(11, 62);
+			this.iconPictureBox2.Location = new System.Drawing.Point(15, 62);
 			this.iconPictureBox2.Name = "iconPictureBox2";
 			this.iconPictureBox2.Size = new System.Drawing.Size(30, 30);
 			this.iconPictureBox2.TabIndex = 38;
@@ -544,22 +555,11 @@
 			this.iconPictureBox1.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(11)))), ((int)(((byte)(255)))));
 			this.iconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Solid;
 			this.iconPictureBox1.IconSize = 30;
-			this.iconPictureBox1.Location = new System.Drawing.Point(11, 7);
+			this.iconPictureBox1.Location = new System.Drawing.Point(15, 7);
 			this.iconPictureBox1.Name = "iconPictureBox1";
 			this.iconPictureBox1.Size = new System.Drawing.Size(30, 30);
 			this.iconPictureBox1.TabIndex = 37;
 			this.iconPictureBox1.TabStop = false;
-			// 
-			// label17
-			// 
-			this.label17.AutoSize = true;
-			this.label17.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-			this.label17.Location = new System.Drawing.Point(128, 286);
-			this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-			this.label17.Name = "label17";
-			this.label17.Size = new System.Drawing.Size(227, 15);
-			this.label17.TabIndex = 43;
-			this.label17.Text = "Automatically detect connection settings.";
 			// 
 			// FrmServers
 			// 
