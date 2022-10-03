@@ -12,6 +12,7 @@ using FluentFTP;
 using FlameFTP.Managers;
 using FlameFTP.Controls;
 using FlameFTP.Model;
+using System.Diagnostics;
 
 namespace FlameFTP.Forms {
 	public partial class MainForm : Form {
@@ -30,14 +31,14 @@ namespace FlameFTP.Forms {
 		}
 
 		private void button1_Click(object sender, EventArgs e) {
-			AddControllerTab();
+			NewConnectionTab();
 		}
 
 		private void connectToolStripMenuItem_Click(object sender, EventArgs e) {
-			AddControllerTab();
+			NewConnectionTab();
 		}
 
-		private void AddControllerTab() {
+		private void NewConnectionTab() {
 			var profile = (ConnectionProfile)listBox1.SelectedItem;
 			//Create the new panel and add it to the tab
 			var tabpage = new TabPage();
@@ -141,17 +142,57 @@ namespace FlameFTP.Forms {
 
 
 		private void BtnProfiles_Click(object sender, EventArgs e) {
-			FrmOptions frmOptions = new FrmOptions();
+			EditServers();
+		}
+
+		private void EditServers() {
+			FrmServers frmOptions = new FrmServers();
 			frmOptions.StartPosition = FormStartPosition.CenterParent;
 			frmOptions.ShowDialog();
 		}
 
 		private void BtnConnect_Click(object sender, EventArgs e) {
-			AddControllerTab();
+			
 		}
 
 		private void BtnDisconnect_Click(object sender, EventArgs e) {
 
 		}
+
+		private void ROBtnGithub_Click(object sender, EventArgs e) {
+			Process.Start(new ProcessStartInfo("https://github.com/robinrodricks/FlameFTP"));
+		}
+		private void ROBtnGithub2_Click(object sender, EventArgs e) {
+			Process.Start(new ProcessStartInfo("https://github.com/robinrodricks/FluentFTP"));
+		}
+
+		private void ROBtnNewConn_Click(object sender, EventArgs e) {
+			EditServers();
+		}
+
+		private void ROBtnServers_Click(object sender, EventArgs e) {
+			EditServers();
+		}
+
+		private void RBtnUpload_Click(object sender, EventArgs e) {
+
+		}
+
+		private void RBtnDownload_Click(object sender, EventArgs e) {
+
+		}
+
+		private void RBtnCompare_Click(object sender, EventArgs e) {
+
+		}
+
+		private void RBtnProps_Click(object sender, EventArgs e) {
+
+		}
+
+		private void ribbonPanel3_ButtonMoreClick(object sender, EventArgs e) {
+			EditServers();
+		}
+
 	}
 }

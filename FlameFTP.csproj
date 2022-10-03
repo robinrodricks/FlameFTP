@@ -83,11 +83,11 @@
     <Compile Include="Forms\FrmNewDirectory.Designer.cs">
       <DependentUpon>FrmNewDirectory.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FrmOptions.cs">
+    <Compile Include="Forms\FrmServers.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FrmOptions.Designer.cs">
-      <DependentUpon>FrmOptions.cs</DependentUpon>
+    <Compile Include="Forms\FrmServers.Designer.cs">
+      <DependentUpon>FrmServers.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
@@ -122,8 +122,8 @@
     <EmbeddedResource Include="Forms\FrmNewDirectory.resx">
       <DependentUpon>FrmNewDirectory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FrmOptions.resx">
-      <DependentUpon>FrmOptions.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FrmServers.resx">
+      <DependentUpon>FrmServers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -154,6 +154,33 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FlameFTP buttons0001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FlameFTP buttons0002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FlameFTP buttons0003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FlameFTP buttons0004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FlameFTP buttons0005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FlameFTP buttons0006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FlameFTP buttons0007.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FlameFTP buttons0008.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FlameFTP buttons0009.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

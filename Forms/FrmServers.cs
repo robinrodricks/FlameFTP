@@ -13,9 +13,9 @@ using FlameFTP.Managers;
 using FlameFTP.Model;
 
 namespace FlameFTP.Forms {
-	public partial class FrmOptions : Form {
+	public partial class FrmServers : Form {
 
-		public FrmOptions() {
+		public FrmServers() {
 			InitializeComponent();
 			Load += FrmOptions_Load;
 		}
