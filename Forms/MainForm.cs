@@ -59,10 +59,6 @@ namespace FlameFTP.Forms {
 			tabControl1.Controls.Remove(sdsd);
 		}
 
-		private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
-			Application.Exit();
-		}
-
 		private void editToolStripMenuItem_Click(object sender, EventArgs e) {
 			var connectionProfile = (ConnectionProfile)listBox1.SelectedItem;
 			FrmConnectionProfile frmConnectionProfile = new FrmConnectionProfile();
@@ -143,13 +139,19 @@ namespace FlameFTP.Forms {
 			LoadConnectionProfiles();
 		}
 
-		private void siteManagerToolStripMenuItem_Click(object sender, EventArgs e) {
+
+		private void BtnProfiles_Click(object sender, EventArgs e) {
 			FrmOptions frmOptions = new FrmOptions();
 			frmOptions.StartPosition = FormStartPosition.CenterParent;
 			frmOptions.ShowDialog();
 		}
 
-		private void aboutToolStripMenuItem_Click(object sender, EventArgs e) {
+		private void BtnConnect_Click(object sender, EventArgs e) {
+			AddControllerTab();
+		}
+
+		private void BtnDisconnect_Click(object sender, EventArgs e) {
+
 		}
 	}
 }
