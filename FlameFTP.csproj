@@ -98,7 +98,6 @@
     <Compile Include="Model\ConnectionProfile.cs" />
     <Compile Include="Model\ConnectionProfilesList.cs" />
     <Compile Include="Model\ExplorerDragDropEventArgs.cs" />
-    <Compile Include="Model\FtpClientEventArgs.cs" />
     <Compile Include="Managers\FtpFileManager.cs" />
     <Compile Include="Managers\LocalFileManager.cs" />
     <Compile Include="Managers\SettingsManager.cs" />

@@ -34,15 +34,6 @@ namespace FlameFTP.Managers {
 
 		}
 
-		public static void OnFtpMessageReceived(FtpClientEventArgs e) {
-			FtpClientMessageEventHandler handler = ClientMessageReceived;
-			if (handler != null) {
-				handler(e);
-			}
-		}
-
-		public static event FtpClientMessageEventHandler ClientMessageReceived;
-		public delegate void FtpClientMessageEventHandler(FtpClientEventArgs e);
 
 		public static void UpdateSettings() {
 			var profilestring = JsonConvert.SerializeObject(ConnectionProfiles);
