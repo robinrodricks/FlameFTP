@@ -45,6 +45,7 @@
 			this.RBtnDownload = new System.Windows.Forms.RibbonButton();
 			this.RBtnCompare = new System.Windows.Forms.RibbonButton();
 			this.RBtnProps = new System.Windows.Forms.RibbonButton();
+			this.ribbonSeparator1 = new System.Windows.Forms.RibbonSeparator();
 			this.SuspendLayout();
 			// 
 			// tabControl1
@@ -63,6 +64,7 @@
 			// 
 			this.RibbonMain.BorderMode = System.Windows.Forms.RibbonWindowMode.NonClientAreaCustomDrawn;
 			this.RibbonMain.CaptionBarVisible = false;
+			this.RibbonMain.Cursor = System.Windows.Forms.Cursors.Default;
 			this.RibbonMain.Font = new System.Drawing.Font("Segoe UI", 9F);
 			this.RibbonMain.Location = new System.Drawing.Point(0, 0);
 			this.RibbonMain.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -129,14 +131,16 @@
 			// 
 			// ribbonPanel3
 			// 
-			this.ribbonPanel3.Items.Add(this.RCmbServerList);
 			this.ribbonPanel3.Items.Add(this.RBtnServers);
+			this.ribbonPanel3.Items.Add(this.ribbonSeparator1);
+			this.ribbonPanel3.Items.Add(this.RCmbServerList);
 			this.ribbonPanel3.Name = "ribbonPanel3";
 			this.ribbonPanel3.Text = "Server";
 			this.ribbonPanel3.ButtonMoreClick += new System.EventHandler(this.ribbonPanel3_ButtonMoreClick);
 			// 
 			// RCmbServerList
 			// 
+			this.RCmbServerList.AllowTextEdit = false;
 			this.RCmbServerList.Name = "RCmbServerList";
 			this.RCmbServerList.SelectedIndex = -1;
 			this.RCmbServerList.Text = "Connect To";
@@ -149,7 +153,7 @@
 			this.RBtnServers.LargeImage = ((System.Drawing.Image)(resources.GetObject("RBtnServers.LargeImage")));
 			this.RBtnServers.Name = "RBtnServers";
 			this.RBtnServers.SmallImage = ((System.Drawing.Image)(resources.GetObject("RBtnServers.SmallImage")));
-			this.RBtnServers.Text = "Manage";
+			this.RBtnServers.Text = "Servers";
 			this.RBtnServers.Click += new System.EventHandler(this.BtnProfiles_Click);
 			// 
 			// ribbonPanel1
@@ -224,6 +228,10 @@
 			this.RBtnProps.Text = "Properties...";
 			this.RBtnProps.Click += new System.EventHandler(this.RBtnProps_Click);
 			// 
+			// ribbonSeparator1
+			// 
+			this.ribbonSeparator1.Name = "ribbonSeparator1";
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -259,5 +267,6 @@
 		private System.Windows.Forms.RibbonPanel ribbonPanel3;
 		private System.Windows.Forms.RibbonComboBox RCmbServerList;
 		private System.Windows.Forms.RibbonOrbMenuItem ROBtnGithub2;
+		private System.Windows.Forms.RibbonSeparator ribbonSeparator1;
 	}
 }
