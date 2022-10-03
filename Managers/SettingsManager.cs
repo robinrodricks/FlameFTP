@@ -12,48 +12,36 @@ using Newtonsoft.Json;
 
 namespace FlameFTP.Managers {
 	public static class SettingsManager {
-		public static ConnectionProfilesList ConnectionProfiles { get; set; }
+		public static FtpSettings Settings { get; set; }
 
-		static SettingsManager() {
-			if (String.IsNullOrEmpty(Settings.Default.Profiles)) {
-				ConnectionProfilesList connectionProfilesList2 = new ConnectionProfilesList();
-				connectionProfilesList2.Profiles = new List<ConnectionProfile>();
-				ConnectionProfile newprofile = new ConnectionProfile() { HostName = "localhost", UserName = "anonymous", PortNo = 21, Sitename = "Localhost", Password = "guest@mydomain.com", FtpEncryptionMode = FtpEncryptionMode.None, FtpDataConnectionType = FtpDataConnectionType.AutoPassive };
+		public static void Init() {
+			Load();
 
-				connectionProfilesList2.Profiles.Add(newprofile);
-
-				var profilestring = JsonConvert.SerializeObject(connectionProfilesList2);
-				Settings.Default.Profiles = profilestring;
-				Settings.Default.Save();
-				Settings.Default.Reload();
+			if (Settings == null || Settings.Servers == null) {
+				Settings = new FtpSettings();
+				Settings.Servers = new List<FtpServerProfile>();
+				Settings.Servers.Add(new FtpServerProfile());
+				Save();
 			}
 
-			var connectionProfilesList = JsonConvert.DeserializeObject<ConnectionProfilesList>(Settings.Default.Profiles);
-
-			ConnectionProfiles = connectionProfilesList;
-
 		}
 
-
-		public static void UpdateSettings() {
-			var profilestring = JsonConvert.SerializeObject(ConnectionProfiles);
-			Settings.Default.Profiles = profilestring;
-			Settings.Default.Save();
-			Settings.Default.Reload();
-
-			var connectionProfilesList = JsonConvert.DeserializeObject<ConnectionProfilesList>(Settings.Default.Profiles);
-
-			ConnectionProfiles = connectionProfilesList;
+		public static void Save() {
+			var profilestring = JsonConvert.SerializeObject(Settings);
+			Properties.Settings.Default.Profiles = profilestring;
+			Properties.Settings.Default.Save();
+			Properties.Settings.Default.Reload();
 		}
 
-		public static void UpdateProfile(ConnectionProfile connectionProfile) {
-			ConnectionProfile foundProfile = ConnectionProfiles.Profiles.Find(c => c.SiteKey == connectionProfile.SiteKey);
-			if (foundProfile != null) {
-				ConnectionProfiles.Profiles.Remove(foundProfile);
+		public static void Load() {
+			if (!string.IsNullOrEmpty(Properties.Settings.Default.Profiles)) {
+				Settings = JsonConvert.DeserializeObject<FtpSettings>(Properties.Settings.Default.Profiles);
 			}
-			ConnectionProfiles.Profiles.Add(connectionProfile);
-			UpdateSettings();
+			else {
+				Settings = null;
+			}
 		}
+
 	}
 
 }

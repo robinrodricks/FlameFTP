@@ -21,7 +21,7 @@ namespace FlameFTP.Controls {
 		/// </summary>
 		/// 
 		private FtpFileManager _ftpHelper;
-		private ConnectionProfile _profile;
+		private Model.FtpServerProfile _profile;
 
 
 		public string PanelName { get; set; }
@@ -30,12 +30,12 @@ namespace FlameFTP.Controls {
 			InitializeComponent();
 		}
 
-		public ExplorerPanel(ConnectionProfile profile) : this() {
+		public ExplorerPanel(Model.FtpServerProfile profile) : this() {
 			_profile = profile;
-			PanelName = _profile.Sitename;
+			PanelName = _profile.ToString();
 
 			_ftpHelper = new FtpFileManager();
-			_ftpHelper.ConnectionProfile = _profile;
+			_ftpHelper.Profile = _profile;
 
 			ExplorerLocal.Ftphelper = _ftpHelper;
 			ExplorerRemote.Ftphelper = _ftpHelper;

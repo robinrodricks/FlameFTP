@@ -9,7 +9,7 @@ using FluentFTP;
 namespace FlameFTP.Managers {
 	public class FtpFileManager {
 		private FtpClient _client;
-		public ConnectionProfile ConnectionProfile { get; set; }
+		public FtpServerProfile Profile { get; set; }
 		public string LocalPath;
 		private string _remotePath;
 		public string RemotePath {
@@ -24,16 +24,21 @@ namespace FlameFTP.Managers {
 
 		public FtpClient GetClient() {
 			if (_client == null) {
-				NetworkCredential networkCredential = new NetworkCredential(ConnectionProfile.UserName, ConnectionProfile.Password);
-				_client = new FtpClient(ConnectionProfile.HostName, networkCredential, ConnectionProfile.PortNo);
-				_client.Config.SslProtocols = ConnectionProfile.SslProtocols;
-				_client.Config.DataConnectionType = ConnectionProfile.FtpDataConnectionType;
-				_client.Config.EncryptionMode = ConnectionProfile.FtpEncryptionMode;
 
+				// create client
+				_client = new FtpClient();
+
+				// configure client using profile
+				Profile.ConfigureClient(_client);
 			}
 
 			if (_client.IsConnected == false) {
-				_client.Connect();
+				if (Profile.IsAuto) {
+					_client.AutoConnect();
+				}
+				else {
+					_client.Connect();
+				}
 			}
 
 			return _client;

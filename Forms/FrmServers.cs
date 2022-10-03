@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using FluentFTP;
 using FlameFTP.Managers;
 using FlameFTP.Model;
+using FlameFTP.Enums;
 
 namespace FlameFTP.Forms {
 	public partial class FrmServers : Form {
@@ -20,131 +21,94 @@ namespace FlameFTP.Forms {
 			Load += FrmOptions_Load;
 		}
 
-		private void LoadProfiles() {
-
-			listBox1.DataSource = SettingsManager.ConnectionProfiles.Profiles;
-
-			listBox1.DisplayMember = "Sitename";
+		private void ReloadProfiles() {
+			LstServers.DisplayMember = "DisplayName";
+			LstServers.DataSource = null;
+			LstServers.DataSource = SettingsManager.Settings.Servers;
 		}
 
 		private void FrmOptions_Load(object sender, EventArgs e) {
-			comboBoxProtocol.DataSource = Enum.GetValues(typeof(SslProtocols));
-			comboBoxEncryption.DataSource = Enum.GetValues(typeof(FtpEncryptionMode));
-			comboBoxDataConnection.DataSource = Enum.GetValues(typeof(FtpDataConnectionType));
 
-			LoadProfiles();
+			CbProtocol.DataSource = Enum.GetValues(typeof(FtpEncryptionMode));
+			CbSecureProtocol.DataSource = Enum.GetValues(typeof(SslProtocols));
+			CbEncoding.DataSource = Enum.GetValues(typeof(FtpEncodingType));
+			CbDataTrans.DataSource = Enum.GetValues(typeof(FtpDataType));
+			CbDataConn.DataSource = Enum.GetValues(typeof(FtpDataConnectionType));
+
+			ReloadProfiles();
 		}
 
-		private void button2_Click(object sender, EventArgs e) {
-			EditProfile();
-			;
+
+		private FtpServerProfile CurProfile;
+
+		private void LoadProfile(FtpServerProfile profile) {
+
+			CurProfile = profile;
+
+			// load profile into UI
+			TxtDisplayName.Text = profile.DisplayName;
+			TxtHost.Text = profile.Host;
+			TxtUser.Text = profile.User;
+			TxtPass.Text = profile.Pass;
+			NumPort.Value = profile.Port;
+			CbAuto.Checked = profile.IsAuto;
+			CbProtocol.SelectedItem = profile.Protocol;
+			CbSecureProtocol.SelectedItem = profile.SecureProtocol;
+			CbEncoding.SelectedItem = profile.Encoding;
+			CbDataTrans.SelectedItem = profile.DataTransType;
+			CbDataConn.SelectedItem = profile.DataConnType;
+		}
+		private void SaveToProfile(FtpServerProfile profile) {
+
+			// update profile from UI
+			profile.DisplayName = TxtDisplayName.Text;
+			profile.Host = TxtHost.Text;
+			profile.User = TxtUser.Text;
+			profile.Pass = TxtPass.Text;
+			profile.Port = Convert.ToInt32(NumPort.Value);
+			profile.IsAuto = CbAuto.Checked;
+			profile.Protocol = (FtpEncryptionMode)CbProtocol.SelectedItem;
+			profile.SecureProtocol = (SslProtocols)CbSecureProtocol.SelectedItem;
+			profile.Encoding = (FtpEncodingType)CbEncoding.SelectedItem;
+			profile.DataTransType = (FtpDataType)CbDataTrans.SelectedItem;
+			profile.DataConnType = (FtpDataConnectionType)CbDataConn.SelectedItem;
+
+			// save settings
+			SettingsManager.Save();
 		}
 
-		private void button1_Click(object sender, EventArgs e) {
-			FrmConnectionProfile frmConnectionProfile = new FrmConnectionProfile();
-			frmConnectionProfile.StartPosition = FormStartPosition.CenterParent;
-			var result = frmConnectionProfile.ShowDialog();
-
-			if (result == DialogResult.OK) {
-				//Create a new Profile
-				ConnectionProfile connectionProfile = new ConnectionProfile();
-				connectionProfile.Sitename = frmConnectionProfile.textBoxSiteName.Text;
-				connectionProfile.HostName = frmConnectionProfile.textBoxHostName.Text;
-				connectionProfile.UserName = frmConnectionProfile.textBoxUserName.Text;
-				connectionProfile.Password = frmConnectionProfile.textBoxPassword.Text;
-				connectionProfile.PortNo = int.Parse(frmConnectionProfile.textBoxPortNo.Text);
-
-				connectionProfile.SslProtocols = (SslProtocols)frmConnectionProfile.comboBoxProtocol.SelectedItem;
-				connectionProfile.FtpDataConnectionType = (FtpDataConnectionType)frmConnectionProfile.comboBoxDataConnection.SelectedItem;
-				connectionProfile.FtpEncryptionMode = (FtpEncryptionMode)frmConnectionProfile.comboBoxEncryption.SelectedItem;
-
-				ConnectionProfilesList connectionProfilesList = SettingsManager.ConnectionProfiles;
-
-				bool exists = connectionProfilesList.Profiles.Exists(profile => profile.SiteKey == connectionProfile.SiteKey);
-
-				if (!exists) {
-					SettingsManager.ConnectionProfiles.Profiles.Add(connectionProfile);
-					SettingsManager.UpdateSettings();
-					LoadProfiles();
-
-				}
+		private void LstServers_SelectedIndexChanged(object sender, EventArgs e) {
+			if (LstServers.SelectedItem != null) {
+				LoadProfile((FtpServerProfile)LstServers.SelectedItem);
+				PanelProfile.Enabled = true;
 			}
-
+			else {
+				PanelProfile.Enabled = false;
+			}
+		}
+		private void BtnNew_Click(object sender, EventArgs e) {
+			var newProfile = new FtpServerProfile();
+			SettingsManager.Settings.Servers.Add(newProfile);
+			ReloadProfiles();
+			LstServers.SelectedItem = newProfile;
 		}
 
-		private void listBox1_Click(object sender, EventArgs e) {
-			UpdateProfileContols();
-
+		private void BtnDelete_Click(object sender, EventArgs e) {
+			SettingsManager.Settings.Servers.Remove(CurProfile);
+			PanelProfile.Enabled = false;
+			ReloadProfiles();
 		}
 
-		private void UpdateProfileContols() {
-			var connectionProfile = (ConnectionProfile)listBox1.SelectedItem;
-
-			comboBoxProtocol.DataSource = Enum.GetValues(typeof(SslProtocols));
-			comboBoxEncryption.DataSource = Enum.GetValues(typeof(FtpEncryptionMode));
-			comboBoxDataConnection.DataSource = Enum.GetValues(typeof(FtpDataConnectionType));
-
-
-			textBoxHostName.Text = connectionProfile.HostName;
-			textBoxPassword.Text = connectionProfile.Password;
-			textBoxPortNo.Text = connectionProfile.PortNo.ToString();
-			textBoxSiteName.Text = connectionProfile.Sitename;
-			textBoxUserName.Text = connectionProfile.UserName;
-
-			comboBoxProtocol.SelectedItem = connectionProfile.SslProtocols;
-
-			comboBoxDataConnection.SelectedItem = connectionProfile.FtpDataConnectionType;
-
-			comboBoxEncryption.SelectedItem = connectionProfile.FtpEncryptionMode;
-
-		}
-
-		private void EditProfile() {
-			var connectionProfile = (ConnectionProfile)listBox1.SelectedItem;
-			FrmConnectionProfile frmConnectionProfile = new FrmConnectionProfile();
-
-			frmConnectionProfile.comboBoxProtocol.DataSource = Enum.GetValues(typeof(SslProtocols));
-			frmConnectionProfile.comboBoxEncryption.DataSource = Enum.GetValues(typeof(FtpEncryptionMode));
-			frmConnectionProfile.comboBoxDataConnection.DataSource = Enum.GetValues(typeof(FtpDataConnectionType));
-
-
-			frmConnectionProfile.textBoxHostName.Text = connectionProfile.HostName;
-			frmConnectionProfile.textBoxPassword.Text = connectionProfile.Password;
-			frmConnectionProfile.textBoxPortNo.Text = connectionProfile.PortNo.ToString();
-			frmConnectionProfile.textBoxSiteName.Text = connectionProfile.Sitename;
-			frmConnectionProfile.textBoxUserName.Text = connectionProfile.UserName;
-
-			frmConnectionProfile.comboBoxProtocol.SelectedItem = connectionProfile.SslProtocols;
-			frmConnectionProfile.lblproto.Text = connectionProfile.SslProtocols.ToString();
-
-			frmConnectionProfile.comboBoxDataConnection.SelectedItem = connectionProfile.FtpDataConnectionType;
-			frmConnectionProfile.lbldata.Text = connectionProfile.FtpDataConnectionType.ToString();
-
-			frmConnectionProfile.comboBoxEncryption.SelectedItem = connectionProfile.FtpEncryptionMode;
-			frmConnectionProfile.lblenc.Text = connectionProfile.FtpEncryptionMode.ToString();
-
-			frmConnectionProfile.StartPosition = FormStartPosition.CenterParent;
-			var actionResult = frmConnectionProfile.ShowDialog();
-			if (actionResult == DialogResult.OK) {
-				connectionProfile.Sitename = frmConnectionProfile.textBoxSiteName.Text;
-				connectionProfile.HostName = frmConnectionProfile.textBoxHostName.Text;
-				connectionProfile.UserName = frmConnectionProfile.textBoxUserName.Text;
-				connectionProfile.Password = frmConnectionProfile.textBoxPassword.Text;
-				connectionProfile.PortNo = int.Parse(frmConnectionProfile.textBoxPortNo.Text);
-				var bob = (SslProtocols)frmConnectionProfile.comboBoxProtocol.SelectedItem;
-				connectionProfile.SslProtocols = bob;
-
-				connectionProfile.FtpDataConnectionType = (FtpDataConnectionType)frmConnectionProfile.comboBoxDataConnection.SelectedItem;
-				connectionProfile.FtpEncryptionMode = (FtpEncryptionMode)frmConnectionProfile.comboBoxEncryption.SelectedItem;
-
-				SettingsManager.UpdateProfile(connectionProfile);
-				SettingsManager.UpdateSettings();
-				LoadProfiles();
+		private void BtnSave_Click(object sender, EventArgs e) {
+			if (CurProfile != null) {
+				SaveToProfile(CurProfile);
+				ReloadProfiles();
 			}
 		}
 
-		private void listBox1_SelectedIndexChanged(object sender, EventArgs e) {
-			UpdateProfileContols();
+		private void CbAuto_CheckedChanged(object sender, EventArgs e) {
+			GrpManual.Enabled = !CbAuto.Checked;
 		}
+
 	}
 }

@@ -27,17 +27,8 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.tabControl1 = new System.Windows.Forms.TabControl();
-			this.listBox1 = new System.Windows.Forms.ListBox();
-			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.connectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.disconnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-			this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.RibbonMain = new System.Windows.Forms.Ribbon();
 			this.ROBtnNewConn = new System.Windows.Forms.RibbonOrbMenuItem();
 			this.ROBtnGithub1 = new System.Windows.Forms.RibbonOrbMenuItem();
@@ -54,9 +45,6 @@
 			this.RBtnDownload = new System.Windows.Forms.RibbonButton();
 			this.RBtnCompare = new System.Windows.Forms.RibbonButton();
 			this.RBtnProps = new System.Windows.Forms.RibbonButton();
-			this.PanelMain = new System.Windows.Forms.Panel();
-			this.contextMenuStrip1.SuspendLayout();
-			this.PanelMain.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tabControl1
@@ -64,79 +52,12 @@
 			this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.tabControl1.Location = new System.Drawing.Point(168, 2);
+			this.tabControl1.Location = new System.Drawing.Point(7, 127);
 			this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
 			this.tabControl1.Name = "tabControl1";
 			this.tabControl1.SelectedIndex = 0;
-			this.tabControl1.Size = new System.Drawing.Size(1099, 590);
+			this.tabControl1.Size = new System.Drawing.Size(1258, 607);
 			this.tabControl1.TabIndex = 2;
-			// 
-			// listBox1
-			// 
-			this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-			this.listBox1.ContextMenuStrip = this.contextMenuStrip1;
-			this.listBox1.FormattingEnabled = true;
-			this.listBox1.IntegralHeight = false;
-			this.listBox1.ItemHeight = 15;
-			this.listBox1.Location = new System.Drawing.Point(0, 5);
-			this.listBox1.Margin = new System.Windows.Forms.Padding(2);
-			this.listBox1.Name = "listBox1";
-			this.listBox1.Size = new System.Drawing.Size(163, 587);
-			this.listBox1.TabIndex = 3;
-			// 
-			// contextMenuStrip1
-			// 
-			this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.connectToolStripMenuItem,
-            this.disconnectToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.editToolStripMenuItem,
-            this.newToolStripMenuItem,
-            this.deleteToolStripMenuItem});
-			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(134, 120);
-			// 
-			// connectToolStripMenuItem
-			// 
-			this.connectToolStripMenuItem.Name = "connectToolStripMenuItem";
-			this.connectToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-			this.connectToolStripMenuItem.Text = "Connect";
-			this.connectToolStripMenuItem.Click += new System.EventHandler(this.connectToolStripMenuItem_Click);
-			// 
-			// disconnectToolStripMenuItem
-			// 
-			this.disconnectToolStripMenuItem.Name = "disconnectToolStripMenuItem";
-			this.disconnectToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-			this.disconnectToolStripMenuItem.Text = "Disconnect";
-			this.disconnectToolStripMenuItem.Click += new System.EventHandler(this.disconnectToolStripMenuItem_Click);
-			// 
-			// toolStripSeparator1
-			// 
-			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Size = new System.Drawing.Size(130, 6);
-			// 
-			// editToolStripMenuItem
-			// 
-			this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-			this.editToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-			this.editToolStripMenuItem.Text = "Edit";
-			this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
-			// 
-			// newToolStripMenuItem
-			// 
-			this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-			this.newToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-			this.newToolStripMenuItem.Text = "New";
-			this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
-			// 
-			// deleteToolStripMenuItem
-			// 
-			this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-			this.deleteToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-			this.deleteToolStripMenuItem.Text = "Delete";
-			this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
 			// 
 			// RibbonMain
 			// 
@@ -303,49 +224,25 @@
 			this.RBtnProps.Text = "Properties...";
 			this.RBtnProps.Click += new System.EventHandler(this.RBtnProps_Click);
 			// 
-			// PanelMain
-			// 
-			this.PanelMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.PanelMain.Controls.Add(this.tabControl1);
-			this.PanelMain.Controls.Add(this.listBox1);
-			this.PanelMain.Location = new System.Drawing.Point(0, 131);
-			this.PanelMain.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-			this.PanelMain.Name = "PanelMain";
-			this.PanelMain.Size = new System.Drawing.Size(1269, 604);
-			this.PanelMain.TabIndex = 6;
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1269, 738);
-			this.Controls.Add(this.PanelMain);
 			this.Controls.Add(this.RibbonMain);
+			this.Controls.Add(this.tabControl1);
 			this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.KeyPreview = true;
 			this.Margin = new System.Windows.Forms.Padding(2);
 			this.Name = "MainForm";
 			this.Text = "FlameFTP";
-			this.contextMenuStrip1.ResumeLayout(false);
-			this.PanelMain.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
 
 		#endregion
 		private System.Windows.Forms.TabControl tabControl1;
-		private System.Windows.Forms.ListBox listBox1;
-		private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-		private System.Windows.Forms.ToolStripMenuItem connectToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem disconnectToolStripMenuItem;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-		private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
 		private System.Windows.Forms.Ribbon RibbonMain;
-		private System.Windows.Forms.Panel PanelMain;
 		private System.Windows.Forms.RibbonTab RibbonTabHome;
 		private System.Windows.Forms.RibbonPanel ribbonPanel1;
 		private System.Windows.Forms.RibbonButton RBtnServers;
