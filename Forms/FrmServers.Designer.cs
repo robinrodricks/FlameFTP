@@ -66,6 +66,7 @@
 			this.iconPictureBox3 = new FontAwesome.Sharp.IconPictureBox();
 			this.iconPictureBox2 = new FontAwesome.Sharp.IconPictureBox();
 			this.iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
+			this.label17 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.NumPort)).BeginInit();
 			this.GrpManual.SuspendLayout();
 			this.PanelProfile.SuspendLayout();
@@ -181,7 +182,7 @@
 			this.BtnSave.IconFont = FontAwesome.Sharp.IconFont.Solid;
 			this.BtnSave.IconSize = 20;
 			this.BtnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.BtnSave.Location = new System.Drawing.Point(115, 512);
+			this.BtnSave.Location = new System.Drawing.Point(115, 553);
 			this.BtnSave.Margin = new System.Windows.Forms.Padding(2);
 			this.BtnSave.Name = "BtnSave";
 			this.BtnSave.Size = new System.Drawing.Size(100, 25);
@@ -201,7 +202,7 @@
 			this.LstServers.Margin = new System.Windows.Forms.Padding(2);
 			this.LstServers.Name = "LstServers";
 			this.LstServers.ScrollAlwaysVisible = true;
-			this.LstServers.Size = new System.Drawing.Size(309, 460);
+			this.LstServers.Size = new System.Drawing.Size(309, 501);
 			this.LstServers.TabIndex = 0;
 			this.LstServers.SelectedIndexChanged += new System.EventHandler(this.LstServers_SelectedIndexChanged);
 			// 
@@ -233,9 +234,9 @@
 			this.label11.Location = new System.Drawing.Point(130, 36);
 			this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.label11.Name = "label11";
-			this.label11.Size = new System.Drawing.Size(250, 15);
+			this.label11.Size = new System.Drawing.Size(253, 15);
 			this.label11.TabIndex = 23;
-			this.label11.Text = "Any name you would remember this server by";
+			this.label11.Text = "Any name you would remember this server by.";
 			// 
 			// label2
 			// 
@@ -244,9 +245,9 @@
 			this.label2.Location = new System.Drawing.Point(130, 89);
 			this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(182, 15);
+			this.label2.Size = new System.Drawing.Size(185, 15);
 			this.label2.TabIndex = 25;
-			this.label2.Text = "The server\'s domain or IP address";
+			this.label2.Text = "The server\'s domain or IP address.";
 			// 
 			// TxtHost
 			// 
@@ -264,9 +265,9 @@
 			this.label3.Location = new System.Drawing.Point(130, 228);
 			this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(253, 15);
+			this.label3.Size = new System.Drawing.Size(256, 15);
 			this.label3.TabIndex = 26;
-			this.label3.Text = "Which port to connect to (use 0 for automatic)";
+			this.label3.Text = "Which port to connect to (use 0 for automatic).";
 			// 
 			// CbAuto
 			// 
@@ -291,9 +292,9 @@
 			this.GrpManual.Controls.Add(this.CbDataConn);
 			this.GrpManual.Controls.Add(this.CbSecureProtocol);
 			this.GrpManual.Controls.Add(this.CbProtocol);
-			this.GrpManual.Location = new System.Drawing.Point(45, 299);
+			this.GrpManual.Location = new System.Drawing.Point(45, 326);
 			this.GrpManual.Name = "GrpManual";
-			this.GrpManual.Size = new System.Drawing.Size(353, 190);
+			this.GrpManual.Size = new System.Drawing.Size(353, 189);
 			this.GrpManual.TabIndex = 28;
 			this.GrpManual.TabStop = false;
 			this.GrpManual.Text = "Manual Connection Settings";
@@ -354,7 +355,7 @@
 			this.BtnDelete.IconFont = FontAwesome.Sharp.IconFont.Solid;
 			this.BtnDelete.IconSize = 20;
 			this.BtnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.BtnDelete.Location = new System.Drawing.Point(219, 512);
+			this.BtnDelete.Location = new System.Drawing.Point(219, 553);
 			this.BtnDelete.Margin = new System.Windows.Forms.Padding(2);
 			this.BtnDelete.Name = "BtnDelete";
 			this.BtnDelete.Size = new System.Drawing.Size(100, 25);
@@ -371,7 +372,7 @@
 			this.BtnNew.IconFont = FontAwesome.Sharp.IconFont.Solid;
 			this.BtnNew.IconSize = 20;
 			this.BtnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.BtnNew.Location = new System.Drawing.Point(11, 512);
+			this.BtnNew.Location = new System.Drawing.Point(11, 553);
 			this.BtnNew.Margin = new System.Windows.Forms.Padding(2);
 			this.BtnNew.Name = "BtnNew";
 			this.BtnNew.Size = new System.Drawing.Size(100, 25);
@@ -426,9 +427,9 @@
 			this.label15.Location = new System.Drawing.Point(128, 173);
 			this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.label15.Name = "label15";
-			this.label15.Size = new System.Drawing.Size(121, 15);
+			this.label15.Size = new System.Drawing.Size(124, 15);
 			this.label15.TabIndex = 36;
-			this.label15.Text = "Your login credentials";
+			this.label15.Text = "Your login credentials.";
 			// 
 			// PanelProfile
 			// 
@@ -436,6 +437,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.PanelProfile.AutoScroll = true;
+			this.PanelProfile.Controls.Add(this.label17);
 			this.PanelProfile.Controls.Add(this.iconPictureBox6);
 			this.PanelProfile.Controls.Add(this.iconPictureBox5);
 			this.PanelProfile.Controls.Add(this.iconPictureBox4);
@@ -461,7 +463,7 @@
 			this.PanelProfile.Controls.Add(this.label4);
 			this.PanelProfile.Location = new System.Drawing.Point(324, 50);
 			this.PanelProfile.Name = "PanelProfile";
-			this.PanelProfile.Size = new System.Drawing.Size(421, 498);
+			this.PanelProfile.Size = new System.Drawing.Size(421, 539);
 			this.PanelProfile.TabIndex = 37;
 			// 
 			// iconPictureBox6
@@ -514,7 +516,7 @@
 			this.iconPictureBox3.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(11)))), ((int)(((byte)(255)))));
 			this.iconPictureBox3.IconFont = FontAwesome.Sharp.IconFont.Solid;
 			this.iconPictureBox3.IconSize = 30;
-			this.iconPictureBox3.Location = new System.Drawing.Point(13, 303);
+			this.iconPictureBox3.Location = new System.Drawing.Point(13, 330);
 			this.iconPictureBox3.Name = "iconPictureBox3";
 			this.iconPictureBox3.Size = new System.Drawing.Size(30, 30);
 			this.iconPictureBox3.TabIndex = 39;
@@ -548,11 +550,22 @@
 			this.iconPictureBox1.TabIndex = 37;
 			this.iconPictureBox1.TabStop = false;
 			// 
+			// label17
+			// 
+			this.label17.AutoSize = true;
+			this.label17.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+			this.label17.Location = new System.Drawing.Point(128, 286);
+			this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.label17.Name = "label17";
+			this.label17.Size = new System.Drawing.Size(227, 15);
+			this.label17.TabIndex = 43;
+			this.label17.Text = "Automatically detect connection settings.";
+			// 
 			// FrmServers
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(743, 548);
+			this.ClientSize = new System.Drawing.Size(743, 589);
 			this.Controls.Add(this.PanelProfile);
 			this.Controls.Add(this.BtnNew);
 			this.Controls.Add(this.BtnDelete);
@@ -618,5 +631,6 @@
 		private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
 		private FontAwesome.Sharp.IconPictureBox iconPictureBox5;
 		private FontAwesome.Sharp.IconPictureBox iconPictureBox6;
+		private System.Windows.Forms.Label label17;
 	}
 }
