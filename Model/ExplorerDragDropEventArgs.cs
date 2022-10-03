@@ -7,10 +7,8 @@ using System.Windows.Forms;
 using FluentFTP;
 
 
-namespace FlameFTP.Model
-{
-	public class ExplorerDragDropEventArgs : EventArgs
-	{
+namespace FlameFTP.Model {
+	public class ExplorerDragDropEventArgs : EventArgs {
 		public TreeNode SourceTreeNode { get; set; }
 
 		public ListView.SelectedListViewItemCollection SourceListViewItemCollection { get; set; }
@@ -21,15 +19,14 @@ namespace FlameFTP.Model
 
 		public ActionEvent ActionType { get; set; }
 
-		public enum ActionEvent
-		{
+		public enum ActionEvent {
 			UploadLocalTreeView,
 			UploadLocalListView,
 			DownLoadRemoteTreeview,
 			DownloadRemoteListView
 		}
-		
-			
-		
+
+
+
 	}
 }

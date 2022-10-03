@@ -1,5 +1,5 @@
 ﻿namespace FlameFTP.Forms {
-	partial class MainController
+	partial class MainForm
 	{
 		/// <summary>
 		/// Required designer variable.

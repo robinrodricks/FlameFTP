@@ -11,12 +11,10 @@ using System.Windows.Forms;
 using FluentFTP;
 
 namespace FlameFTP.Forms {
-	public partial class FrmConnectionProfile : Form
-	{
-		public FrmConnectionProfile()
-		{
+	public partial class FrmConnectionProfile : Form {
+		public FrmConnectionProfile() {
 			InitializeComponent();
 		}
-		
+
 	}
 }

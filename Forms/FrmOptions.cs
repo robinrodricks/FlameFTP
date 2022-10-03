@@ -13,25 +13,21 @@ using FlameFTP.Managers;
 using FlameFTP.Model;
 
 namespace FlameFTP.Forms {
-	public partial class FrmOptions : Form
-	{
+	public partial class FrmOptions : Form {
 
-		public FrmOptions()
-		{
+		public FrmOptions() {
 			InitializeComponent();
 			Load += FrmOptions_Load;
 		}
 
-		private void LoadProfiles()
-		{
+		private void LoadProfiles() {
 
 			listBox1.DataSource = SettingsManager.ConnectionProfiles.Profiles;
 
 			listBox1.DisplayMember = "Sitename";
 		}
 
-		private void FrmOptions_Load(object sender, EventArgs e)
-		{
+		private void FrmOptions_Load(object sender, EventArgs e) {
 			comboBoxProtocol.DataSource = Enum.GetValues(typeof(SslProtocols));
 			comboBoxEncryption.DataSource = Enum.GetValues(typeof(FtpEncryptionMode));
 			comboBoxDataConnection.DataSource = Enum.GetValues(typeof(FtpDataConnectionType));
@@ -39,20 +35,17 @@ namespace FlameFTP.Forms {
 			LoadProfiles();
 		}
 
-		private void button2_Click(object sender, EventArgs e)
-		{
+		private void button2_Click(object sender, EventArgs e) {
 			EditProfile();
 			;
 		}
 
-		private void button1_Click(object sender, EventArgs e)
-		{
+		private void button1_Click(object sender, EventArgs e) {
 			FrmConnectionProfile frmConnectionProfile = new FrmConnectionProfile();
 			frmConnectionProfile.StartPosition = FormStartPosition.CenterParent;
 			var result = frmConnectionProfile.ShowDialog();
 
-			if (result == DialogResult.OK)
-			{
+			if (result == DialogResult.OK) {
 				//Create a new Profile
 				ConnectionProfile connectionProfile = new ConnectionProfile();
 				connectionProfile.Sitename = frmConnectionProfile.textBoxSiteName.Text;
@@ -69,8 +62,7 @@ namespace FlameFTP.Forms {
 
 				bool exists = connectionProfilesList.Profiles.Exists(profile => profile.SiteKey == connectionProfile.SiteKey);
 
-				if (!exists)
-				{
+				if (!exists) {
 					SettingsManager.ConnectionProfiles.Profiles.Add(connectionProfile);
 					SettingsManager.UpdateSettings();
 					LoadProfiles();
@@ -80,14 +72,12 @@ namespace FlameFTP.Forms {
 
 		}
 
-		private void listBox1_Click(object sender, EventArgs e)
-		{
+		private void listBox1_Click(object sender, EventArgs e) {
 			UpdateProfileContols();
 
 		}
 
-		private void UpdateProfileContols()
-		{
+		private void UpdateProfileContols() {
 			var connectionProfile = (ConnectionProfile)listBox1.SelectedItem;
 
 			comboBoxProtocol.DataSource = Enum.GetValues(typeof(SslProtocols));
@@ -109,8 +99,7 @@ namespace FlameFTP.Forms {
 
 		}
 
-		private void EditProfile()
-		{
+		private void EditProfile() {
 			var connectionProfile = (ConnectionProfile)listBox1.SelectedItem;
 			FrmConnectionProfile frmConnectionProfile = new FrmConnectionProfile();
 
@@ -136,8 +125,7 @@ namespace FlameFTP.Forms {
 
 			frmConnectionProfile.StartPosition = FormStartPosition.CenterParent;
 			var actionResult = frmConnectionProfile.ShowDialog();
-			if (actionResult == DialogResult.OK)
-			{
+			if (actionResult == DialogResult.OK) {
 				connectionProfile.Sitename = frmConnectionProfile.textBoxSiteName.Text;
 				connectionProfile.HostName = frmConnectionProfile.textBoxHostName.Text;
 				connectionProfile.UserName = frmConnectionProfile.textBoxUserName.Text;
@@ -155,8 +143,7 @@ namespace FlameFTP.Forms {
 			}
 		}
 
-		private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-		{
+		private void listBox1_SelectedIndexChanged(object sender, EventArgs e) {
 			UpdateProfileContols();
 		}
 	}

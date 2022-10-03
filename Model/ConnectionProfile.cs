@@ -3,10 +3,8 @@ using System.Security.Authentication;
 using System.Security.Policy;
 using FluentFTP;
 
-namespace FlameFTP.Model
-{
-	public class ConnectionProfile
-	{
+namespace FlameFTP.Model {
+	public class ConnectionProfile {
 		public Guid SiteKey { get; set; }
 		public string Sitename { get; set; }
 		public string HostName { get; set; }
@@ -17,8 +15,7 @@ namespace FlameFTP.Model
 		public FtpEncryptionMode FtpEncryptionMode { get; set; }
 		public FtpDataConnectionType FtpDataConnectionType { get; set; }
 
-		public ConnectionProfile()
-		{
+		public ConnectionProfile() {
 			SiteKey = Guid.NewGuid();
 			;
 		}

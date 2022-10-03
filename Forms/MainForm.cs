@@ -14,37 +14,30 @@ using FlameFTP.Controls;
 using FlameFTP.Model;
 
 namespace FlameFTP.Forms {
-	public partial class MainController : Form
-	{
-		public MainController()
-		{
+	public partial class MainForm : Form {
+		public MainForm() {
 			InitializeComponent();
 			Load += MainController_Load;
 		}
 
-		private void MainController_Load(object sender, EventArgs e)
-		{
+		private void MainController_Load(object sender, EventArgs e) {
 			LoadConnectionProfiles();
 		}
 
-		private void LoadConnectionProfiles()
-		{
+		private void LoadConnectionProfiles() {
 			listBox1.DataSource = SettingsManager.ConnectionProfiles.Profiles;
 			listBox1.DisplayMember = "Sitename";
 		}
 
-		private void button1_Click(object sender, EventArgs e)
-		{
+		private void button1_Click(object sender, EventArgs e) {
 			AddControllerTab();
 		}
 
-		private void connectToolStripMenuItem_Click(object sender, EventArgs e)
-		{
+		private void connectToolStripMenuItem_Click(object sender, EventArgs e) {
 			AddControllerTab();
 		}
 
-		private void AddControllerTab()
-		{
+		private void AddControllerTab() {
 			var profile = (ConnectionProfile)listBox1.SelectedItem;
 			//Create the new panel and add it to the tab
 			var tabpage = new TabPage();
@@ -60,20 +53,17 @@ namespace FlameFTP.Forms {
 			tabpage.Controls.Add(explorerPanel);
 		}
 
-		private void disconnectToolStripMenuItem_Click(object sender, EventArgs e)
-		{
+		private void disconnectToolStripMenuItem_Click(object sender, EventArgs e) {
 			var profile = (ConnectionProfile)listBox1.SelectedItem;
 			var sdsd = tabControl1.Controls[profile.Sitename];
 			tabControl1.Controls.Remove(sdsd);
 		}
 
-		private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-		{
+		private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
 			Application.Exit();
 		}
 
-		private void editToolStripMenuItem_Click(object sender, EventArgs e)
-		{
+		private void editToolStripMenuItem_Click(object sender, EventArgs e) {
 			var connectionProfile = (ConnectionProfile)listBox1.SelectedItem;
 			FrmConnectionProfile frmConnectionProfile = new FrmConnectionProfile();
 
@@ -99,8 +89,7 @@ namespace FlameFTP.Forms {
 
 			frmConnectionProfile.StartPosition = FormStartPosition.CenterParent;
 			var actionResult = frmConnectionProfile.ShowDialog();
-			if (actionResult == DialogResult.OK)
-			{
+			if (actionResult == DialogResult.OK) {
 				connectionProfile.Sitename = frmConnectionProfile.textBoxSiteName.Text;
 				connectionProfile.HostName = frmConnectionProfile.textBoxHostName.Text;
 				connectionProfile.UserName = frmConnectionProfile.textBoxUserName.Text;
@@ -118,8 +107,7 @@ namespace FlameFTP.Forms {
 			LoadConnectionProfiles();
 		}
 
-		private void newToolStripMenuItem_Click(object sender, EventArgs e)
-		{
+		private void newToolStripMenuItem_Click(object sender, EventArgs e) {
 			var connectionProfile = new ConnectionProfile();
 			connectionProfile.Sitename = "Enter Site Name";
 			FrmConnectionProfile frmConnectionProfile = new FrmConnectionProfile();
@@ -131,8 +119,7 @@ namespace FlameFTP.Forms {
 
 			frmConnectionProfile.StartPosition = FormStartPosition.CenterParent;
 			var actionResult = frmConnectionProfile.ShowDialog();
-			if (actionResult == DialogResult.OK)
-			{
+			if (actionResult == DialogResult.OK) {
 				connectionProfile.Sitename = frmConnectionProfile.textBoxSiteName.Text;
 				connectionProfile.HostName = frmConnectionProfile.textBoxHostName.Text;
 				connectionProfile.UserName = frmConnectionProfile.textBoxUserName.Text;
@@ -149,23 +136,20 @@ namespace FlameFTP.Forms {
 			LoadConnectionProfiles();
 		}
 
-		private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
-		{
+		private void deleteToolStripMenuItem_Click(object sender, EventArgs e) {
 			var profile = (ConnectionProfile)listBox1.SelectedItem;
 			SettingsManager.ConnectionProfiles.Profiles.Remove(profile);
 			SettingsManager.UpdateSettings();
 			LoadConnectionProfiles();
 		}
 
-		private void siteManagerToolStripMenuItem_Click(object sender, EventArgs e)
-		{
+		private void siteManagerToolStripMenuItem_Click(object sender, EventArgs e) {
 			FrmOptions frmOptions = new FrmOptions();
 			frmOptions.StartPosition = FormStartPosition.CenterParent;
 			frmOptions.ShowDialog();
 		}
 
-		private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-		{
+		private void aboutToolStripMenuItem_Click(object sender, EventArgs e) {
 		}
 	}
 }

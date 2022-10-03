@@ -9,10 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FlameFTP.Forms {
-	public partial class FrmNewDirectory : Form
-	{
-		public FrmNewDirectory()
-		{
+	public partial class FrmNewDirectory : Form {
+		public FrmNewDirectory() {
 			InitializeComponent();
 		}
 	}

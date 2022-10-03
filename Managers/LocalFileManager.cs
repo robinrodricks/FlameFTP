@@ -7,24 +7,20 @@ using System.Windows.Forms;
 using FluentFTP;
 
 namespace FlameFTP.Managers {
-	public class LocalFileHelper
-	{
-		public static List<FtpListItem> GetLocalFoldersListItems(string folderPath)
-		{
+	public class LocalFileManager {
+		public static List<FtpListItem> GetLocalFoldersListItems(string folderPath) {
 			List<FtpListItem> ftpListItems = new List<FtpListItem>();
 
 			string[] dirs = Directory.GetDirectories(folderPath);
 
-			foreach (string dir in dirs)
-			{
+			foreach (string dir in dirs) {
 				DirectoryInfo directoryInfo = new DirectoryInfo(dir);
 
-				if ((directoryInfo.Attributes & FileAttributes.Hidden) == 0)
-				{
+				if ((directoryInfo.Attributes & FileAttributes.Hidden) == 0) {
 					FtpListItem ftpListItem = new FtpListItem();
 					ftpListItem.Name = directoryInfo.Name;
 					ftpListItem.FullName = directoryInfo.FullName;
-					ftpListItem.Type = FtpFileSystemObjectType.Directory;
+					ftpListItem.Type = FtpObjectType.Directory;
 					//ftpListItem.Tag = directoryInfo;
 					//ftpListItem.Name = "folder";
 
@@ -35,34 +31,29 @@ namespace FlameFTP.Managers {
 			return ftpListItems;
 		}
 
-		public static List<FtpListItem> GetLocalFileListItems(string folderPath, int i)
-		{
+		public static List<FtpListItem> GetLocalFileListItems(string folderPath, int i) {
 			List<FtpListItem> ftpListItems = new List<FtpListItem>();
 
 			string[] filelist;
 
-			if (i == 1)
-			{
+			if (i == 1) {
 				filelist = Directory.GetFiles(folderPath, "*.*", SearchOption.AllDirectories);
 
 			}
-			else
-			{
+			else {
 				filelist = Directory.GetFiles(folderPath, "*.*", SearchOption.TopDirectoryOnly);
 
 			}
 
-			foreach (string file in filelist)
-			{
+			foreach (string file in filelist) {
 				FileInfo fileInfo = new FileInfo(file);
 
-				if ((fileInfo.Attributes & FileAttributes.Hidden) == 0)
-				{
+				if ((fileInfo.Attributes & FileAttributes.Hidden) == 0) {
 					FtpListItem ftpListItem = new FtpListItem();
 					ftpListItem.Name = fileInfo.Name;
 					ftpListItem.FullName = fileInfo.FullName;
 					//listViewItem.Tag = fileInfo;
-					ftpListItem.Type = FtpFileSystemObjectType.File;
+					ftpListItem.Type = FtpObjectType.File;
 					ftpListItems.Add(ftpListItem);
 				}
 			}
@@ -72,21 +63,17 @@ namespace FlameFTP.Managers {
 
 		}
 
-		public static bool TryToDelete(string f)
-		{
-			try
-			{
+		public static bool TryToDelete(string f) {
+			try {
 				File.Delete(f);
 				return true;
 			}
-			catch (Exception)
-			{
+			catch (Exception) {
 				return false;
 			}
 		}
 
-		public static void CreateDirectory(string newFolderName)
-		{
+		public static void CreateDirectory(string newFolderName) {
 			Directory.CreateDirectory(newFolderName);
 
 		}
