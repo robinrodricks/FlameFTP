@@ -14,9 +14,9 @@ using FlameFTP.Model;
 using FlameFTP.Enums;
 
 namespace FlameFTP.Forms {
-	public partial class FrmServers : Form {
+	public partial class ServerForm : Form {
 
-		public FrmServers() {
+		public ServerForm() {
 			InitializeComponent();
 			Load += FrmOptions_Load;
 		}

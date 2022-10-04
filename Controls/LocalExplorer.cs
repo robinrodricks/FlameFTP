@@ -13,7 +13,7 @@ using FlameFTP.Forms;
 
 namespace FlameFTP.Controls {
 	public partial class LocalExplorer : UserControl {
-		public FtpFileManager Ftphelper;
+		public FtpManager Manager;
 		private ImageList _treeview1ImageList;
 		public TreeNode SelectedNode;
 
@@ -162,7 +162,7 @@ namespace FlameFTP.Controls {
 			SelectedNode = e.Node;
 
 			var sourceTreeNode = e.Node;
-			Ftphelper.LocalPath = sourceTreeNode.FullPath;
+			Manager.LocalPath = sourceTreeNode.FullPath;
 			PathLabel.Text = sourceTreeNode.Name;
 
 			if (e.Button == MouseButtons.Left) {
@@ -211,7 +211,7 @@ namespace FlameFTP.Controls {
 					ftpItemsList.Add(ftpListItem);
 				}
 			}
-			Ftphelper.Uploadfiles(ftpItemsList);
+			Manager.Uploadfiles(ftpItemsList);
 
 
 		}

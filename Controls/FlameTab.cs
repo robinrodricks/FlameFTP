@@ -13,48 +13,44 @@ using FlameFTP.Model;
 using FlameFTP.Managers;
 
 namespace FlameFTP.Controls {
-	public partial class ExplorerPanel : UserControl {
-		/// <summary>
-		/// This will hold the ftphelper, we can then use the helper to connect remotely,
-		/// The helper functions are then passed to the relevant explorer list.
-		/// explorerlocal is the local file manager, explorer remote is the ftp site.
-		/// </summary>
-		/// 
-		private FtpFileManager _ftpHelper;
-		private Model.FtpServerProfile _profile;
+	public partial class FlameTab : UserControl {
+
+
+		private FtpManager Manager;
+		private FtpServerProfile Profile;
 
 
 		public string PanelName { get; set; }
 
-		public ExplorerPanel() {
+		public FlameTab() {
 			InitializeComponent();
 		}
 
-		public ExplorerPanel(Model.FtpServerProfile profile) : this() {
-			_profile = profile;
-			PanelName = _profile.ToString();
+		public void Init(FtpServerProfile profile) {
+			Profile = profile;
+			PanelName = Profile.ToString();
 
-			_ftpHelper = new FtpFileManager();
-			_ftpHelper.Profile = _profile;
+			Manager = new FtpManager();
+			Manager.Profile = profile;
+			Manager.Logger = OnManagerLog;
+			Manager.Init();
 
-			ExplorerLocal.Ftphelper = _ftpHelper;
-			ExplorerRemote.Ftphelper = _ftpHelper;
+			ExplorerLocal.Manager = Manager;
+			ExplorerRemote.Manager = Manager;
 
-			//Set up event handlers for explorer
-			ExplorerLocal.ListViewDragDropReceived += ExplorerLocal_ListViewDragDropReceived;
-			ExplorerLocal.TreeViewDragDropReceived += ExplorerLocal_TreeViewDragDropReceived;
+			// Set up event handlers for explorer components
+			if (Manager.IsConnected) {
+				ExplorerLocal.ListViewDragDropReceived += ExplorerLocal_ListViewDragDropReceived;
+				ExplorerLocal.TreeViewDragDropReceived += ExplorerLocal_TreeViewDragDropReceived;
+				ExplorerLocal.TreeViewUploadMenuReceived += ExplorerLocal_TreeViewUploadMenuReceived;
+				ExplorerRemote.ListViewDragDropReceived += ExplorerRemote_ListViewDragDropReceived;
+				ExplorerRemote.TreeViewDragDropReceived += ExplorerRemote_TreeViewDragDropReceived;
+				ExplorerRemote.TreeViewDownloadMenuReceived += ExplorerRemote_TreeViewDownloadMenuReceived;
+			}
 
-			ExplorerLocal.TreeViewUploadMenuReceived += ExplorerLocal_TreeViewUploadMenuReceived;
-
-			//
-			ExplorerRemote.ListViewDragDropReceived += ExplorerRemote_ListViewDragDropReceived;
-			ExplorerRemote.TreeViewDragDropReceived += ExplorerRemote_TreeViewDragDropReceived;
-			ExplorerRemote.TreeViewDownloadMenuReceived += ExplorerRemote_TreeViewDownloadMenuReceived;
-
-			LoadPanelData();
-
-			// Set up logging
-			_ftpHelper.GetClient().LegacyLogger = OnClientMessageReceived;
+			// load initial directory listings
+			ExplorerRemote.PopulateInitialRemoteListView();
+			ExplorerLocal.LoadLocalDrives();
 		}
 
 		private void ExplorerRemote_TreeViewDownloadMenuReceived(ExplorerDragDropEventArgs e) {
@@ -83,8 +79,8 @@ namespace FlameFTP.Controls {
 					baseRemotePath = e.SourceTreeNode.Name;
 				}
 
-				_ftpHelper.SetWorkingDirectory(e.SourceTreeNode.FullPath);
-				var listItems = _ftpHelper.GetRecursiveListing();
+				Manager.SetWorkingDirectory(e.SourceTreeNode.FullPath);
+				var listItems = Manager.GetRecursiveListing();
 
 				foreach (FtpListItem ftpListItem in listItems) {
 					listItemsToLoad.Add(ftpListItem);
@@ -117,7 +113,7 @@ namespace FlameFTP.Controls {
 			}
 
 			if (listItemsToLoad.Count > 0) {
-				_ftpHelper.DownloadFiles(listItemsToLoad, downloadPath, baseRemotePath);
+				Manager.DownloadFiles(listItemsToLoad, downloadPath, baseRemotePath);
 				ExplorerLocal.LoadLocalFilesFromPath(targetNode);
 			}
 		}
@@ -167,11 +163,11 @@ namespace FlameFTP.Controls {
 			}
 
 			if (e.TargetTreeNode != null) {
-				_ftpHelper.SetWorkingDirectory(e.TargetTreeNode.FullPath);
+				Manager.SetWorkingDirectory(e.TargetTreeNode.FullPath);
 			}
 
 			if (listItemsToLoad.Count > 0) {
-				_ftpHelper.Uploadfiles(listItemsToLoad);
+				Manager.Uploadfiles(listItemsToLoad);
 
 				ExplorerRemote.RefreshRemoteListView(e.TargetTreeNode);
 			}
@@ -221,11 +217,11 @@ namespace FlameFTP.Controls {
 			}
 
 			if (e.TargetTreeNode != null) {
-				_ftpHelper.SetWorkingDirectory(e.TargetTreeNode.FullPath);
+				Manager.SetWorkingDirectory(e.TargetTreeNode.FullPath);
 			}
 
 			if (listItemsToLoad.Count > 0) {
-				_ftpHelper.Uploadfiles(listItemsToLoad);
+				Manager.Uploadfiles(listItemsToLoad);
 
 				ExplorerRemote.RefreshRemoteListView(e.TargetTreeNode);
 			}
@@ -255,8 +251,8 @@ namespace FlameFTP.Controls {
 					baseRemotePath = e.SourceTreeNode.Name;
 				}
 
-				_ftpHelper.SetWorkingDirectory(e.SourceTreeNode.FullPath);
-				var listItems = _ftpHelper.GetRecursiveListing();
+				Manager.SetWorkingDirectory(e.SourceTreeNode.FullPath);
+				var listItems = Manager.GetRecursiveListing();
 
 				foreach (FtpListItem ftpListItem in listItems) {
 					listItemsToLoad.Add(ftpListItem);
@@ -289,7 +285,7 @@ namespace FlameFTP.Controls {
 			}
 
 			if (listItemsToLoad.Count > 0) {
-				_ftpHelper.DownloadFiles(listItemsToLoad, downloadPath, baseRemotePath);
+				Manager.DownloadFiles(listItemsToLoad, downloadPath, baseRemotePath);
 				ExplorerLocal.LoadLocalFilesFromPath(targetNode);
 			}
 		}
@@ -322,7 +318,7 @@ namespace FlameFTP.Controls {
 
 
 				//Lets create a new folder
-				var helperRemotePath = _ftpHelper.RemotePath;
+				var helperRemotePath = Manager.RemotePath;
 
 				foreach (FtpListItem item in listItemsToLoad) {
 					DirectoryInfo pd = Directory.GetParent(e.SourceTreeNode.FullPath);
@@ -343,7 +339,7 @@ namespace FlameFTP.Controls {
 			}
 
 			if (listItemsToLoad.Count > 0) {
-				_ftpHelper.Uploadfiles(listItemsToLoad);
+				Manager.Uploadfiles(listItemsToLoad);
 
 				ExplorerRemote.RefreshRemoteListView(ExplorerRemote.SelectedNode);
 			}
@@ -358,7 +354,7 @@ namespace FlameFTP.Controls {
 			}
 
 			List<FtpListItem> listItemsToLoad = new List<FtpListItem>();
-			string baseRemotePath = _ftpHelper.RemotePath;
+			string baseRemotePath = Manager.RemotePath;
 			baseRemotePath = baseRemotePath.Replace("/", "");
 			baseRemotePath = baseRemotePath.Replace("\\", "/");
 
@@ -375,13 +371,13 @@ namespace FlameFTP.Controls {
 				if (e.SourceTreeNode != null) {
 					baseRemotePath = e.SourceTreeNode.Name;
 				}
-				var newpath = Path.Combine(_ftpHelper.LocalPath, e.SourceTreeNode.Text);
+				var newpath = Path.Combine(Manager.LocalPath, e.SourceTreeNode.Text);
 				LocalFileManager.CreateDirectory(newpath);
-				_ftpHelper.LocalPath = newpath;
+				Manager.LocalPath = newpath;
 
-				_ftpHelper.SetWorkingDirectory(e.SourceTreeNode.FullPath);
+				Manager.SetWorkingDirectory(e.SourceTreeNode.FullPath);
 
-				var listItems = _ftpHelper.GetRecursiveListing();
+				var listItems = Manager.GetRecursiveListing();
 
 				foreach (FtpListItem ftpListItem in listItems) {
 					//Need to create the folder here
@@ -395,26 +391,27 @@ namespace FlameFTP.Controls {
 			//Use the text property of the node to create a new folder.
 
 			if (listItemsToLoad.Count > 0) {
-				_ftpHelper.DownloadFiles(listItemsToLoad, _ftpHelper.LocalPath, baseRemotePath);
+				Manager.DownloadFiles(listItemsToLoad, Manager.LocalPath, baseRemotePath);
 			}
 		}
 
 
-		private void LoadPanelData() {
-			ExplorerRemote.PopulateInitialRemoteListView();
-			ExplorerLocal.LoadLocalDrives();
+
+		private void OnManagerLog(FtpTraceLevel level, string text) {
+			LogItem(level, text);
 		}
 
-		private void OnClientMessageReceived(FtpTraceLevel level, string text) {
-			string texttoappend = text + System.Environment.NewLine;
-			listBox2.Items.Add(texttoappend);
+		private void LogItem(FtpTraceLevel level, string text) {
+			string texttoappend = text + Environment.NewLine;
+			LstLog.Items.Add(texttoappend);
 
-			while (listBox2.Items.Count >= 200) {
-				listBox2.Items.RemoveAt(0);
+			while (LstLog.Items.Count >= 200) {
+				LstLog.Items.RemoveAt(0);
 
 			}
 
-			listBox2.SelectedIndex = listBox2.Items.Count - 1;
+			LstLog.SelectedIndex = LstLog.Items.Count - 1;
 		}
+
 	}
 }

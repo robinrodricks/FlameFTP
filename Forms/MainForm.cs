@@ -23,8 +23,15 @@ namespace FlameFTP.Forms {
 
 		private void MainController_Load(object sender, EventArgs e) {
 			SettingsManager.Init();
+			UpdateServerList();
 		}
 
+		private void UpdateServerList() {
+			RBtnConnectTo.DropDownItems.Clear();
+			foreach (var server in SettingsManager.Settings.Servers) {
+				RBtnConnectTo.DropDownItems.Add(new RibbonButton { Text = server.ToString(), Tag = server });
+			}
+		}
 
 		private void button1_Click(object sender, EventArgs e) {
 			
@@ -34,20 +41,21 @@ namespace FlameFTP.Forms {
 			
 		}
 
-		private void NewConnectionTab() {
-			/*var profile = (Model.FtpServerProfile)listBox1.SelectedItem;
-			//Create the new panel and add it to the tab
-			var tabpage = new TabPage();
-			tabpage.Text = profile.Sitename + "       ";
-			tabpage.Name = profile.Sitename;
+		private void NewConnectionTab(FtpServerProfile profile) {
 
+			// Create the new panel and add it to the tab
+			var tabpage = new TabPage();
+			tabpage.Text = profile.ToString() + "       ";
+			tabpage.Name = profile.ToString();
 			tabControl1.TabPages.Add(tabpage);
 
-			ExplorerPanel explorerPanel = new ExplorerPanel(profile);
-
-			explorerPanel.Dock = DockStyle.Fill;
-
-			tabpage.Controls.Add(explorerPanel);*/
+			// add a FlameTab within the TabPage to manage the connection
+			FlameTab tab = new FlameTab();
+			tab.SuspendLayout();
+			tab.Init(profile);
+			tab.Dock = DockStyle.Fill;
+			tabpage.Controls.Add(tab);
+			tab.ResumeLayout();
 		}
 
 		private void disconnectToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -62,9 +70,10 @@ namespace FlameFTP.Forms {
 		}
 
 		private void EditServers() {
-			FrmServers frmOptions = new FrmServers();
+			ServerForm frmOptions = new ServerForm();
 			frmOptions.StartPosition = FormStartPosition.CenterParent;
 			frmOptions.ShowDialog();
+			UpdateServerList();
 		}
 
 		private void BtnConnect_Click(object sender, EventArgs e) {
@@ -106,8 +115,16 @@ namespace FlameFTP.Forms {
 
 		}
 
+		private void RBtnDelete_Click(object sender, EventArgs e) {
+
+		}
 		private void ribbonPanel3_ButtonMoreClick(object sender, EventArgs e) {
 			EditServers();
+		}
+
+		private void RBtnConnectTo_DropDownItemClicked(object sender, RibbonItemEventArgs e) {
+			var profile = ((FtpServerProfile)((RibbonButton)e.Item).Tag);
+			NewConnectionTab(profile);
 		}
 
 	}

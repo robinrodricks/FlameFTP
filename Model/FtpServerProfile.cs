@@ -16,8 +16,8 @@ namespace FlameFTP.Model {
 
 		public string DisplayName { get; set; } = "New Profile";
 		public string Host { get; set; } = "localhost";
-		public string User { get; set; } = "";
-		public string Pass { get; set; } = "";
+		public string User { get; set; } = "anonymous";
+		public string Pass { get; set; } = "anonymous";
 		public int Port { get; set; } = 0;
 		public FtpEncryptionMode Protocol { get; set; } = FtpEncryptionMode.Auto;
 		public SslProtocols SecureProtocol { get; set; } = SslProtocols.Default;
@@ -60,6 +60,7 @@ namespace FlameFTP.Model {
 			client.Config.DataConnectionType = DataConnType;
 			client.Config.DownloadDataType = DataTransType;
 			client.Config.UploadDataType = DataTransType;
+			client.Config.ValidateAnyCertificate = true;
 		}
 
 	}

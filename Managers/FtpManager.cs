@@ -7,11 +7,20 @@ using FlameFTP.Model;
 using FluentFTP;
 
 namespace FlameFTP.Managers {
-	public class FtpFileManager {
-		private FtpClient _client;
+	public class FtpManager {
+		private FtpClient Ftp;
 		public FtpServerProfile Profile { get; set; }
 		public string LocalPath;
 		private string _remotePath;
+
+		//     Add a custom listener here to get events every time a message is logged.
+		public Action<FtpTraceLevel, string> Logger { get; set; }
+		public bool IsConnected { get; private set; }
+
+		public void Init() {
+			GetClient();
+		}
+
 		public string RemotePath {
 			get { return _remotePath; }
 			set {
@@ -23,31 +32,62 @@ namespace FlameFTP.Managers {
 		}
 
 		public FtpClient GetClient() {
-			if (_client == null) {
+			try {
 
-				// create client
-				_client = new FtpClient();
+				if (Ftp == null) {
 
-				// configure client using profile
-				Profile.ConfigureClient(_client);
-			}
+					// create client
+					Ftp = new FtpClient();
 
-			if (_client.IsConnected == false) {
-				if (Profile.IsAuto) {
-					_client.AutoConnect();
+					// add logger
+					Ftp.LegacyLogger = Logger;
+
+					// configure client using profile
+					Profile.ConfigureClient(Ftp);
 				}
-				else {
-					_client.Connect();
-				}
-			}
 
-			return _client;
+				if (Ftp.IsConnected == false) {
+					if (Profile.IsAuto) {
+						Ftp.AutoConnect();
+					}
+					else {
+						Ftp.Connect();
+					}
+				}
+				IsConnected = true;
+				return Ftp;
+			}
+			catch (Exception ex) {
+				Logger(FtpTraceLevel.Error, "Error:    Error connecting to server: " + ex.Message);
+				IsConnected = false;
+			}
+			return null;
 		}
 
+		public List<FtpListItem> GetRemoteListViewItems() {
+			var client = GetClient();
+
+			if (IsConnected) {
+
+				// get a list of files and directories in the "/htdocs" folder
+				List<FtpListItem> listItems = new List<FtpListItem>();
+				foreach (FtpListItem ftpListItem in client.GetListing()) {
+					listItems.Add(ftpListItem);
+				}
+
+				var result = listItems.OrderByDescending(d => d.Type).ThenBy(f => f.Name).ToList();
+				return result;
+			}
+
+			return new List<FtpListItem>();
+		}
 		public bool DownloadFile(string localPath, string remotePath) {
 			var client = GetClient();
-			var ok = client.DownloadFile(localPath, remotePath);
-			return ok == FtpStatus.Success || ok == FtpStatus.Skipped;
+			if (IsConnected) {
+				var ok = client.DownloadFile(localPath, remotePath);
+				return ok == FtpStatus.Success || ok == FtpStatus.Skipped;
+			}
+			return false;
 		}
 
 		public string GetFolderPathFromListItem(FtpListItem ftpListItem) {
@@ -160,18 +200,5 @@ namespace FlameFTP.Managers {
 
 		}
 
-		public List<FtpListItem> GetRemoteListViewItems() {
-			var client = GetClient();
-			List<FtpListItem> listItems = new List<FtpListItem>();
-
-			// get a list of files and directories in the "/htdocs" folder
-			foreach (FtpListItem ftpListItem in client.GetListing()) {
-				listItems.Add(ftpListItem);
-			}
-
-			var returnitems = listItems.OrderByDescending(d => d.Type).ThenBy(f => f.Name).ToList();
-
-			return returnitems;
-		}
 	}
 }

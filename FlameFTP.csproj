@@ -66,11 +66,11 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\ExplorerPanel.cs">
+    <Compile Include="Controls\FlameTab.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\ExplorerPanel.Designer.cs">
-      <DependentUpon>ExplorerPanel.cs</DependentUpon>
+    <Compile Include="Controls\FlameTab.Designer.cs">
+      <DependentUpon>FlameTab.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\LocalExplorer.cs">
       <SubType>UserControl</SubType>
@@ -85,11 +85,17 @@
     <Compile Include="Forms\FrmNewDirectory.Designer.cs">
       <DependentUpon>FrmNewDirectory.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FrmServers.cs">
+    <Compile Include="Forms\ServerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FrmServers.Designer.cs">
-      <DependentUpon>FrmServers.cs</DependentUpon>
+    <Compile Include="Forms\ServerForm.Designer.cs">
+      <DependentUpon>ServerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TransferForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TransferForm.Designer.cs">
+      <DependentUpon>TransferForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
@@ -100,7 +106,7 @@
     <Compile Include="Model\FtpServerProfile.cs" />
     <Compile Include="Model\FtpSettings.cs" />
     <Compile Include="Model\ExplorerDragDropEventArgs.cs" />
-    <Compile Include="Managers\FtpFileManager.cs" />
+    <Compile Include="Managers\FtpManager.cs" />
     <Compile Include="Managers\LocalFileManager.cs" />
     <Compile Include="Managers\SettingsManager.cs" />
     <Compile Include="Formats\ShellIcon.cs" />
@@ -112,8 +118,8 @@
     <Compile Include="Controls\RemoteExplorer.Designer.cs">
       <DependentUpon>RemoteExplorer.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Controls\ExplorerPanel.resx">
-      <DependentUpon>ExplorerPanel.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\FlameTab.resx">
+      <DependentUpon>FlameTab.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\LocalExplorer.resx">
       <DependentUpon>LocalExplorer.cs</DependentUpon>
@@ -121,8 +127,11 @@
     <EmbeddedResource Include="Forms\FrmNewDirectory.resx">
       <DependentUpon>FrmNewDirectory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FrmServers.resx">
-      <DependentUpon>FrmServers.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\ServerForm.resx">
+      <DependentUpon>ServerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TransferForm.resx">
+      <DependentUpon>TransferForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

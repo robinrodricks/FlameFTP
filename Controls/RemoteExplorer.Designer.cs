@@ -60,6 +60,7 @@
 			// 
 			this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+			this.splitContainer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.splitContainer1.Name = "splitContainer1";
 			// 
 			// splitContainer1.Panel1
@@ -69,8 +70,8 @@
 			// splitContainer1.Panel2
 			// 
 			this.splitContainer1.Panel2.Controls.Add(this.listView1);
-			this.splitContainer1.Size = new System.Drawing.Size(1145, 694);
-			this.splitContainer1.SplitterDistance = 380;
+			this.splitContainer1.Size = new System.Drawing.Size(1002, 652);
+			this.splitContainer1.SplitterDistance = 332;
 			this.splitContainer1.TabIndex = 0;
 			// 
 			// treeView1
@@ -81,9 +82,10 @@
 			this.treeView1.ImageIndex = 0;
 			this.treeView1.ImageList = this.imageList1;
 			this.treeView1.Location = new System.Drawing.Point(0, 0);
+			this.treeView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.treeView1.Name = "treeView1";
 			this.treeView1.SelectedImageIndex = 0;
-			this.treeView1.Size = new System.Drawing.Size(380, 694);
+			this.treeView1.Size = new System.Drawing.Size(332, 652);
 			this.treeView1.TabIndex = 0;
 			this.treeView1.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeView1_ItemDrag);
 			this.treeView1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
@@ -99,26 +101,26 @@
             this.viewFrileToolStripMenuItem,
             this.downloadFolderToolStripMenuItem});
 			this.TreeViewContextMenu.Name = "TreeViewContextMenu";
-			this.TreeViewContextMenu.Size = new System.Drawing.Size(211, 104);
+			this.TreeViewContextMenu.Size = new System.Drawing.Size(165, 70);
 			// 
 			// downloadFilesToolStripMenuItem
 			// 
 			this.downloadFilesToolStripMenuItem.Name = "downloadFilesToolStripMenuItem";
-			this.downloadFilesToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+			this.downloadFilesToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
 			this.downloadFilesToolStripMenuItem.Text = "Add Folder";
 			this.downloadFilesToolStripMenuItem.Click += new System.EventHandler(this.downloadFilesToolStripMenuItem_Click);
 			// 
 			// viewFrileToolStripMenuItem
 			// 
 			this.viewFrileToolStripMenuItem.Name = "viewFrileToolStripMenuItem";
-			this.viewFrileToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+			this.viewFrileToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
 			this.viewFrileToolStripMenuItem.Text = "Delete Folder";
 			this.viewFrileToolStripMenuItem.Click += new System.EventHandler(this.viewFrileToolStripMenuItem_Click);
 			// 
 			// downloadFolderToolStripMenuItem
 			// 
 			this.downloadFolderToolStripMenuItem.Name = "downloadFolderToolStripMenuItem";
-			this.downloadFolderToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+			this.downloadFolderToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
 			this.downloadFolderToolStripMenuItem.Text = "Download Folder";
 			this.downloadFolderToolStripMenuItem.Click += new System.EventHandler(this.downloadFolderToolStripMenuItem_Click);
 			// 
@@ -136,9 +138,11 @@
             this.columnHeader1});
 			this.listView1.ContextMenuStrip = this.ListViewContextMenu;
 			this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.listView1.HideSelection = false;
 			this.listView1.Location = new System.Drawing.Point(0, 0);
+			this.listView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.listView1.Name = "listView1";
-			this.listView1.Size = new System.Drawing.Size(761, 694);
+			this.listView1.Size = new System.Drawing.Size(666, 652);
 			this.listView1.SmallImageList = this.imageList1;
 			this.listView1.TabIndex = 0;
 			this.listView1.UseCompatibleStateImageBehavior = false;
@@ -160,34 +164,35 @@
             this.deleteFileToolStripMenuItem,
             this.viewFileToolStripMenuItem});
 			this.ListViewContextMenu.Name = "ListViewContextMenu";
-			this.ListViewContextMenu.Size = new System.Drawing.Size(175, 76);
+			this.ListViewContextMenu.Size = new System.Drawing.Size(150, 70);
 			// 
 			// uplaodFileToolStripMenuItem
 			// 
 			this.uplaodFileToolStripMenuItem.Name = "uplaodFileToolStripMenuItem";
-			this.uplaodFileToolStripMenuItem.Size = new System.Drawing.Size(174, 24);
+			this.uplaodFileToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
 			this.uplaodFileToolStripMenuItem.Text = "Download File";
 			this.uplaodFileToolStripMenuItem.Click += new System.EventHandler(this.uploadFileToolStripMenuItem_Click);
 			// 
 			// deleteFileToolStripMenuItem
 			// 
 			this.deleteFileToolStripMenuItem.Name = "deleteFileToolStripMenuItem";
-			this.deleteFileToolStripMenuItem.Size = new System.Drawing.Size(174, 24);
+			this.deleteFileToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
 			this.deleteFileToolStripMenuItem.Text = "Delete File";
 			this.deleteFileToolStripMenuItem.Click += new System.EventHandler(this.deleteFileToolStripMenuItem_Click);
 			// 
 			// viewFileToolStripMenuItem
 			// 
 			this.viewFileToolStripMenuItem.Name = "viewFileToolStripMenuItem";
-			this.viewFileToolStripMenuItem.Size = new System.Drawing.Size(174, 24);
+			this.viewFileToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
 			this.viewFileToolStripMenuItem.Text = "View File";
 			this.viewFileToolStripMenuItem.Click += new System.EventHandler(this.viewFileToolStripMenuItem_Click);
 			// 
 			// LabelPath
 			// 
-			this.LabelPath.Location = new System.Drawing.Point(3, 10);
+			this.LabelPath.Location = new System.Drawing.Point(2, 9);
+			this.LabelPath.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.LabelPath.Name = "LabelPath";
-			this.LabelPath.Size = new System.Drawing.Size(881, 23);
+			this.LabelPath.Size = new System.Drawing.Size(771, 22);
 			this.LabelPath.TabIndex = 0;
 			this.LabelPath.Text = "label1";
 			// 
@@ -195,6 +200,7 @@
 			// 
 			this.ParentSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.ParentSplitContainer.Location = new System.Drawing.Point(0, 0);
+			this.ParentSplitContainer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.ParentSplitContainer.Name = "ParentSplitContainer";
 			this.ParentSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
 			// 
@@ -205,17 +211,20 @@
 			// ParentSplitContainer.Panel2
 			// 
 			this.ParentSplitContainer.Panel2.Controls.Add(this.splitContainer1);
-			this.ParentSplitContainer.Size = new System.Drawing.Size(1145, 738);
-			this.ParentSplitContainer.SplitterDistance = 40;
+			this.ParentSplitContainer.Size = new System.Drawing.Size(1002, 692);
+			this.ParentSplitContainer.SplitterDistance = 37;
+			this.ParentSplitContainer.SplitterWidth = 3;
 			this.ParentSplitContainer.TabIndex = 2;
 			// 
 			// RemoteExplorer
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.ParentSplitContainer);
+			this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.Name = "RemoteExplorer";
-			this.Size = new System.Drawing.Size(1145, 738);
+			this.Size = new System.Drawing.Size(1002, 692);
 			this.splitContainer1.Panel1.ResumeLayout(false);
 			this.splitContainer1.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();

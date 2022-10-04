@@ -65,6 +65,7 @@ namespace FlameFTP.Controls {
 			// 
 			this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+			this.splitContainer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.splitContainer1.Name = "splitContainer1";
 			// 
 			// splitContainer1.Panel1
@@ -74,8 +75,8 @@ namespace FlameFTP.Controls {
 			// splitContainer1.Panel2
 			// 
 			this.splitContainer1.Panel2.Controls.Add(this.listView1);
-			this.splitContainer1.Size = new System.Drawing.Size(1145, 694);
-			this.splitContainer1.SplitterDistance = 380;
+			this.splitContainer1.Size = new System.Drawing.Size(1002, 652);
+			this.splitContainer1.SplitterDistance = 332;
 			this.splitContainer1.TabIndex = 0;
 			// 
 			// treeView1
@@ -86,9 +87,10 @@ namespace FlameFTP.Controls {
 			this.treeView1.ImageIndex = 0;
 			this.treeView1.ImageList = this.imageList1;
 			this.treeView1.Location = new System.Drawing.Point(0, 0);
+			this.treeView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.treeView1.Name = "treeView1";
 			this.treeView1.SelectedImageIndex = 0;
-			this.treeView1.Size = new System.Drawing.Size(380, 694);
+			this.treeView1.Size = new System.Drawing.Size(332, 652);
 			this.treeView1.TabIndex = 0;
 			this.treeView1.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeView1_ItemDrag);
 			this.treeView1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
@@ -104,26 +106,26 @@ namespace FlameFTP.Controls {
             this.removeFolderToolStripMenuItem,
             this.uploadFolderToolStripMenuItem});
 			this.TreeViewContextMenu.Name = "TreeViewContextMenu";
-			this.TreeViewContextMenu.Size = new System.Drawing.Size(179, 76);
+			this.TreeViewContextMenu.Size = new System.Drawing.Size(154, 70);
 			// 
 			// addFolderToolStripMenuItem
 			// 
 			this.addFolderToolStripMenuItem.Name = "addFolderToolStripMenuItem";
-			this.addFolderToolStripMenuItem.Size = new System.Drawing.Size(178, 24);
+			this.addFolderToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
 			this.addFolderToolStripMenuItem.Text = "Add Folder";
 			this.addFolderToolStripMenuItem.Click += new System.EventHandler(this.addFolderToolStripMenuItem_Click);
 			// 
 			// removeFolderToolStripMenuItem
 			// 
 			this.removeFolderToolStripMenuItem.Name = "removeFolderToolStripMenuItem";
-			this.removeFolderToolStripMenuItem.Size = new System.Drawing.Size(178, 24);
+			this.removeFolderToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
 			this.removeFolderToolStripMenuItem.Text = "Remove Folder";
 			this.removeFolderToolStripMenuItem.Click += new System.EventHandler(this.removeFolderToolStripMenuItem_Click);
 			// 
 			// uploadFolderToolStripMenuItem
 			// 
 			this.uploadFolderToolStripMenuItem.Name = "uploadFolderToolStripMenuItem";
-			this.uploadFolderToolStripMenuItem.Size = new System.Drawing.Size(178, 24);
+			this.uploadFolderToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
 			this.uploadFolderToolStripMenuItem.Text = "Upload Folder";
 			this.uploadFolderToolStripMenuItem.Click += new System.EventHandler(this.uploadFolderToolStripMenuItem_Click);
 			// 
@@ -141,9 +143,11 @@ namespace FlameFTP.Controls {
             this.columnHeader1});
 			this.listView1.ContextMenuStrip = this.ListViewContextMenu;
 			this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.listView1.HideSelection = false;
 			this.listView1.Location = new System.Drawing.Point(0, 0);
+			this.listView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.listView1.Name = "listView1";
-			this.listView1.Size = new System.Drawing.Size(761, 694);
+			this.listView1.Size = new System.Drawing.Size(666, 652);
 			this.listView1.SmallImageList = this.imageList1;
 			this.listView1.TabIndex = 0;
 			this.listView1.UseCompatibleStateImageBehavior = false;
@@ -165,26 +169,26 @@ namespace FlameFTP.Controls {
             this.viewFileToolStripMenuItem,
             this.deleteFileToolStripMenuItem});
 			this.ListViewContextMenu.Name = "ListViewContextMenu";
-			this.ListViewContextMenu.Size = new System.Drawing.Size(155, 76);
+			this.ListViewContextMenu.Size = new System.Drawing.Size(134, 70);
 			// 
 			// UploadFileToolStripMenuItem
 			// 
 			this.UploadFileToolStripMenuItem.Name = "UploadFileToolStripMenuItem";
-			this.UploadFileToolStripMenuItem.Size = new System.Drawing.Size(154, 24);
+			this.UploadFileToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
 			this.UploadFileToolStripMenuItem.Text = "Upload File";
 			this.UploadFileToolStripMenuItem.Click += new System.EventHandler(this.uploadFileToolStripMenuItem_Click);
 			// 
 			// viewFileToolStripMenuItem
 			// 
 			this.viewFileToolStripMenuItem.Name = "viewFileToolStripMenuItem";
-			this.viewFileToolStripMenuItem.Size = new System.Drawing.Size(154, 24);
+			this.viewFileToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
 			this.viewFileToolStripMenuItem.Text = "View File";
 			this.viewFileToolStripMenuItem.Click += new System.EventHandler(this.viewFileToolStripMenuItem_Click);
 			// 
 			// deleteFileToolStripMenuItem
 			// 
 			this.deleteFileToolStripMenuItem.Name = "deleteFileToolStripMenuItem";
-			this.deleteFileToolStripMenuItem.Size = new System.Drawing.Size(154, 24);
+			this.deleteFileToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
 			this.deleteFileToolStripMenuItem.Text = "Delete File";
 			this.deleteFileToolStripMenuItem.Click += new System.EventHandler(this.deleteFileToolStripMenuItem_Click);
 			// 
@@ -192,6 +196,7 @@ namespace FlameFTP.Controls {
 			// 
 			this.ParentContainer.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.ParentContainer.Location = new System.Drawing.Point(0, 0);
+			this.ParentContainer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.ParentContainer.Name = "ParentContainer";
 			this.ParentContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
 			// 
@@ -202,25 +207,29 @@ namespace FlameFTP.Controls {
 			// ParentContainer.Panel2
 			// 
 			this.ParentContainer.Panel2.Controls.Add(this.splitContainer1);
-			this.ParentContainer.Size = new System.Drawing.Size(1145, 738);
-			this.ParentContainer.SplitterDistance = 40;
+			this.ParentContainer.Size = new System.Drawing.Size(1002, 692);
+			this.ParentContainer.SplitterDistance = 37;
+			this.ParentContainer.SplitterWidth = 3;
 			this.ParentContainer.TabIndex = 2;
 			// 
 			// PathLabel
 			// 
-			this.PathLabel.Location = new System.Drawing.Point(3, 10);
+			this.PathLabel.Location = new System.Drawing.Point(2, 9);
+			this.PathLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.PathLabel.Name = "PathLabel";
-			this.PathLabel.Size = new System.Drawing.Size(881, 23);
+			this.PathLabel.Size = new System.Drawing.Size(771, 22);
 			this.PathLabel.TabIndex = 0;
 			this.PathLabel.Text = "label1";
 			// 
 			// LocalExplorer
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.ParentContainer);
+			this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.Name = "LocalExplorer";
-			this.Size = new System.Drawing.Size(1145, 738);
+			this.Size = new System.Drawing.Size(1002, 692);
 			this.splitContainer1.Panel1.ResumeLayout(false);
 			this.splitContainer1.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();

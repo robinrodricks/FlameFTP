@@ -15,7 +15,7 @@ namespace FlameFTP.Controls {
 		/// <summary>
 		/// This is the control that is going to handle the remote FTP calls.
 		/// </summary>
-		public FtpFileManager Ftphelper;
+		public FtpManager Manager;
 		private ImageList _treeview2ImageList;
 		public TreeNode SelectedNode;
 
@@ -43,7 +43,7 @@ namespace FlameFTP.Controls {
 				treeView1.Nodes.Add(rootNode);
 			}
 
-			var ftpItemsList = Ftphelper.GetRemoteListViewItems();
+			var ftpItemsList = Manager.GetRemoteListViewItems();
 
 			PopulateTreeViewWithItems(ftpItemsList, rootNode);
 		}
@@ -98,21 +98,23 @@ namespace FlameFTP.Controls {
 			foreach (var selecteditem in fred) {
 				var listitem = (ListViewItem)selecteditem;
 
-				var ok = Ftphelper.DownloadFile(Path.Combine(Ftphelper.LocalPath, listitem.Text), listitem.Text);
+				var ok = Manager.DownloadFile(Path.Combine(Manager.LocalPath, listitem.Text), listitem.Text);
 			}
 		}
 
 		public void RefreshRemoteListView(TreeNode selectedNode) {
-			Ftphelper.SetWorkingDirectory(selectedNode.FullPath);
+			if (Manager.IsConnected) {
+				Manager.SetWorkingDirectory(selectedNode.FullPath);
 
-			//This gets the ftp item list from the working folder on the server
-			var remoteListViewItems = Ftphelper.GetRemoteListViewItems();
+				//This gets the ftp item list from the working folder on the server
+				var remoteListViewItems = Manager.GetRemoteListViewItems();
 
-			//Populate the lefthad treeview
-			PopulateTreeViewWithItems(remoteListViewItems, selectedNode);
+				//Populate the lefthad treeview
+				PopulateTreeViewWithItems(remoteListViewItems, selectedNode);
 
-			//Populate the right had list view
-			PopulateListViewWithItems(remoteListViewItems, selectedNode);
+				//Populate the right had list view
+				PopulateListViewWithItems(remoteListViewItems, selectedNode);
+			}
 		}
 
 		public void PopulateListViewWithItems(List<FtpListItem> ftpItemsList, TreeNode selectedNode) {
@@ -158,7 +160,7 @@ namespace FlameFTP.Controls {
 			SelectedNode = e.Node;
 
 			var sourceTreeNode = e.Node;
-			Ftphelper.RemotePath = sourceTreeNode.FullPath;
+			Manager.RemotePath = sourceTreeNode.FullPath;
 			LabelPath.Text = sourceTreeNode.Name;
 
 			if (e.Button == MouseButtons.Left) {
@@ -285,7 +287,7 @@ namespace FlameFTP.Controls {
 			//Create a remote directory
 			var newfolderName = GetNewFolderName();
 			if (!string.IsNullOrEmpty(newfolderName)) {
-				Ftphelper.CreateRemoteFolder(newfolderName);
+				Manager.CreateRemoteFolder(newfolderName);
 				RefreshRemoteListView(treeView1.SelectedNode);
 			}
 		}
@@ -307,7 +309,7 @@ namespace FlameFTP.Controls {
 		}
 
 		private void viewFrileToolStripMenuItem_Click(object sender, System.EventArgs e) {
-			string remoteFolder = Ftphelper.GetWorkingDirectory();
+			string remoteFolder = Manager.GetWorkingDirectory();
 			var confrimstr = string.Format("Are you sure to delete the folder {0}  and subdirectories ??", remoteFolder);
 
 			var confirmResult = MessageBox.Show(confrimstr,
@@ -316,8 +318,8 @@ namespace FlameFTP.Controls {
 
 			if (confirmResult == DialogResult.Yes) {
 				// If 'Yes', do something here.
-				Ftphelper.DeleteRemoteFolder(Ftphelper.GetWorkingDirectory());
-				Ftphelper.SetWorkingDirectory("/");
+				Manager.DeleteRemoteFolder(Manager.GetWorkingDirectory());
+				Manager.SetWorkingDirectory("/");
 				RefreshRemoteListView(treeView1.TopNode);
 			}
 		}
@@ -333,7 +335,7 @@ namespace FlameFTP.Controls {
 				//Path.GetTempFileName();
 				var tempfile = Path.Combine(Path.GetTempPath(), fileInfo.Name);
 
-				if (Ftphelper.DownloadFile(tempfile, ftpListItem.FullName)) {
+				if (Manager.DownloadFile(tempfile, ftpListItem.FullName)) {
 					System.Diagnostics.Process.Start(tempfile);
 				}
 
@@ -348,7 +350,7 @@ namespace FlameFTP.Controls {
 				FtpListItem ftpListItem = (FtpListItem)selectedItem.Tag;
 				//var FileinfoList = new List<FtpListItem>();
 				//FileinfoList.Add(ftpListItem);
-				Ftphelper.DeleteRemoteFile(ftpListItem.FullName);
+				Manager.DeleteRemoteFile(ftpListItem.FullName);
 				RefreshRemoteListView(treeView1.SelectedNode);
 
 			}

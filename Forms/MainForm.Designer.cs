@@ -35,8 +35,8 @@
 			this.ROBtnGithub2 = new System.Windows.Forms.RibbonOrbMenuItem();
 			this.RibbonTabHome = new System.Windows.Forms.RibbonTab();
 			this.ribbonPanel3 = new System.Windows.Forms.RibbonPanel();
-			this.RCmbServerList = new System.Windows.Forms.RibbonComboBox();
 			this.RBtnServers = new System.Windows.Forms.RibbonButton();
+			this.RBtnConnectTo = new System.Windows.Forms.RibbonButton();
 			this.ribbonPanel1 = new System.Windows.Forms.RibbonPanel();
 			this.RBtnConnect = new System.Windows.Forms.RibbonButton();
 			this.RBtnDisconnect = new System.Windows.Forms.RibbonButton();
@@ -45,7 +45,7 @@
 			this.RBtnDownload = new System.Windows.Forms.RibbonButton();
 			this.RBtnCompare = new System.Windows.Forms.RibbonButton();
 			this.RBtnProps = new System.Windows.Forms.RibbonButton();
-			this.ribbonSeparator1 = new System.Windows.Forms.RibbonSeparator();
+			this.RBtnDelete = new System.Windows.Forms.RibbonButton();
 			this.SuspendLayout();
 			// 
 			// tabControl1
@@ -62,7 +62,7 @@
 			// 
 			// RibbonMain
 			// 
-			this.RibbonMain.BorderMode = System.Windows.Forms.RibbonWindowMode.NonClientAreaCustomDrawn;
+			this.RibbonMain.BorderMode = System.Windows.Forms.RibbonWindowMode.InsideWindow;
 			this.RibbonMain.CaptionBarVisible = false;
 			this.RibbonMain.Cursor = System.Windows.Forms.Cursors.Default;
 			this.RibbonMain.Font = new System.Drawing.Font("Segoe UI", 9F);
@@ -132,20 +132,10 @@
 			// ribbonPanel3
 			// 
 			this.ribbonPanel3.Items.Add(this.RBtnServers);
-			this.ribbonPanel3.Items.Add(this.ribbonSeparator1);
-			this.ribbonPanel3.Items.Add(this.RCmbServerList);
+			this.ribbonPanel3.Items.Add(this.RBtnConnectTo);
 			this.ribbonPanel3.Name = "ribbonPanel3";
 			this.ribbonPanel3.Text = "Server";
 			this.ribbonPanel3.ButtonMoreClick += new System.EventHandler(this.ribbonPanel3_ButtonMoreClick);
-			// 
-			// RCmbServerList
-			// 
-			this.RCmbServerList.AllowTextEdit = false;
-			this.RCmbServerList.Name = "RCmbServerList";
-			this.RCmbServerList.SelectedIndex = -1;
-			this.RCmbServerList.Text = "Connect To";
-			this.RCmbServerList.TextBoxText = "";
-			this.RCmbServerList.TextBoxWidth = 150;
 			// 
 			// RBtnServers
 			// 
@@ -155,6 +145,16 @@
 			this.RBtnServers.SmallImage = ((System.Drawing.Image)(resources.GetObject("RBtnServers.SmallImage")));
 			this.RBtnServers.Text = "Servers";
 			this.RBtnServers.Click += new System.EventHandler(this.BtnProfiles_Click);
+			// 
+			// RBtnConnectTo
+			// 
+			this.RBtnConnectTo.Image = ((System.Drawing.Image)(resources.GetObject("RBtnConnectTo.Image")));
+			this.RBtnConnectTo.LargeImage = ((System.Drawing.Image)(resources.GetObject("RBtnConnectTo.LargeImage")));
+			this.RBtnConnectTo.Name = "RBtnConnectTo";
+			this.RBtnConnectTo.SmallImage = ((System.Drawing.Image)(resources.GetObject("RBtnConnectTo.SmallImage")));
+			this.RBtnConnectTo.Style = System.Windows.Forms.RibbonButtonStyle.DropDown;
+			this.RBtnConnectTo.Text = "Connect To";
+			this.RBtnConnectTo.DropDownItemClicked += new System.Windows.Forms.RibbonButton.RibbonItemEventHandler(this.RBtnConnectTo_DropDownItemClicked);
 			// 
 			// ribbonPanel1
 			// 
@@ -189,6 +189,7 @@
 			this.ribbonPanel2.Items.Add(this.RBtnDownload);
 			this.ribbonPanel2.Items.Add(this.RBtnCompare);
 			this.ribbonPanel2.Items.Add(this.RBtnProps);
+			this.ribbonPanel2.Items.Add(this.RBtnDelete);
 			this.ribbonPanel2.Name = "ribbonPanel2";
 			this.ribbonPanel2.Text = "Files";
 			// 
@@ -216,7 +217,7 @@
 			this.RBtnCompare.LargeImage = ((System.Drawing.Image)(resources.GetObject("RBtnCompare.LargeImage")));
 			this.RBtnCompare.Name = "RBtnCompare";
 			this.RBtnCompare.SmallImage = ((System.Drawing.Image)(resources.GetObject("RBtnCompare.SmallImage")));
-			this.RBtnCompare.Text = "Verify";
+			this.RBtnCompare.Text = "Verify...";
 			this.RBtnCompare.Click += new System.EventHandler(this.RBtnCompare_Click);
 			// 
 			// RBtnProps
@@ -228,9 +229,14 @@
 			this.RBtnProps.Text = "Properties...";
 			this.RBtnProps.Click += new System.EventHandler(this.RBtnProps_Click);
 			// 
-			// ribbonSeparator1
+			// RBtnDelete
 			// 
-			this.ribbonSeparator1.Name = "ribbonSeparator1";
+			this.RBtnDelete.Image = ((System.Drawing.Image)(resources.GetObject("RBtnDelete.Image")));
+			this.RBtnDelete.LargeImage = ((System.Drawing.Image)(resources.GetObject("RBtnDelete.LargeImage")));
+			this.RBtnDelete.Name = "RBtnDelete";
+			this.RBtnDelete.SmallImage = ((System.Drawing.Image)(resources.GetObject("RBtnDelete.SmallImage")));
+			this.RBtnDelete.Text = "Delete...";
+			this.RBtnDelete.Click += new System.EventHandler(this.RBtnDelete_Click);
 			// 
 			// MainForm
 			// 
@@ -265,8 +271,8 @@
 		private System.Windows.Forms.RibbonButton RBtnCompare;
 		private System.Windows.Forms.RibbonButton RBtnProps;
 		private System.Windows.Forms.RibbonPanel ribbonPanel3;
-		private System.Windows.Forms.RibbonComboBox RCmbServerList;
 		private System.Windows.Forms.RibbonOrbMenuItem ROBtnGithub2;
-		private System.Windows.Forms.RibbonSeparator ribbonSeparator1;
+		private System.Windows.Forms.RibbonButton RBtnConnectTo;
+		private System.Windows.Forms.RibbonButton RBtnDelete;
 	}
 }
