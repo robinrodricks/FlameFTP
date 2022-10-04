@@ -27,90 +27,112 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-			this.LstLog = new System.Windows.Forms.ListBox();
+			this.components = new System.ComponentModel.Container();
 			this.ExplorerLocal = new FlameFTP.Controls.LocalExplorer();
 			this.ExplorerRemote = new FlameFTP.Controls.RemoteExplorer();
-			this.tableLayoutPanel1.SuspendLayout();
+			this.LstLog = new FlameFTP.Controls.ColoredLog(this.components);
+			this.SplitVert = new System.Windows.Forms.SplitContainer();
+			this.SplitHoriz = new System.Windows.Forms.SplitContainer();
+			((System.ComponentModel.ISupportInitialize)(this.SplitVert)).BeginInit();
+			this.SplitVert.Panel1.SuspendLayout();
+			this.SplitVert.Panel2.SuspendLayout();
+			this.SplitVert.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.SplitHoriz)).BeginInit();
+			this.SplitHoriz.Panel1.SuspendLayout();
+			this.SplitHoriz.Panel2.SuspendLayout();
+			this.SplitHoriz.SuspendLayout();
 			this.SuspendLayout();
-			// 
-			// tableLayoutPanel1
-			// 
-			this.tableLayoutPanel1.ColumnCount = 3;
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 9F));
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel1.Controls.Add(this.LstLog, 0, 2);
-			this.tableLayoutPanel1.Controls.Add(this.ExplorerLocal, 0, 0);
-			this.tableLayoutPanel1.Controls.Add(this.ExplorerRemote, 2, 0);
-			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-			this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
-			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			this.tableLayoutPanel1.RowCount = 3;
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 9F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 187F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 18F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(979, 695);
-			this.tableLayoutPanel1.TabIndex = 0;
-			// 
-			// LstLog
-			// 
-			this.LstLog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-			this.tableLayoutPanel1.SetColumnSpan(this.LstLog, 5);
-			this.LstLog.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.LstLog.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.LstLog.ForeColor = System.Drawing.Color.White;
-			this.LstLog.FormattingEnabled = true;
-			this.LstLog.ItemHeight = 14;
-			this.LstLog.Location = new System.Drawing.Point(2, 510);
-			this.LstLog.Margin = new System.Windows.Forms.Padding(2);
-			this.LstLog.Name = "LstLog";
-			this.LstLog.Size = new System.Drawing.Size(975, 183);
-			this.LstLog.TabIndex = 1;
 			// 
 			// ExplorerLocal
 			// 
-			this.ExplorerLocal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.ExplorerLocal.Location = new System.Drawing.Point(2, 2);
-			this.ExplorerLocal.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.ExplorerLocal.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.ExplorerLocal.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.ExplorerLocal.Location = new System.Drawing.Point(0, 0);
+			this.ExplorerLocal.Margin = new System.Windows.Forms.Padding(2);
 			this.ExplorerLocal.Name = "ExplorerLocal";
-			this.ExplorerLocal.Size = new System.Drawing.Size(481, 495);
+			this.ExplorerLocal.Size = new System.Drawing.Size(492, 496);
 			this.ExplorerLocal.TabIndex = 2;
 			// 
 			// ExplorerRemote
 			// 
-			this.ExplorerRemote.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.ExplorerRemote.Location = new System.Drawing.Point(496, 2);
-			this.ExplorerRemote.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.ExplorerRemote.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.ExplorerRemote.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.ExplorerRemote.Location = new System.Drawing.Point(0, 0);
+			this.ExplorerRemote.Margin = new System.Windows.Forms.Padding(2);
 			this.ExplorerRemote.Name = "ExplorerRemote";
-			this.ExplorerRemote.Size = new System.Drawing.Size(481, 495);
+			this.ExplorerRemote.Size = new System.Drawing.Size(483, 496);
 			this.ExplorerRemote.TabIndex = 3;
+			// 
+			// LstLog
+			// 
+			this.LstLog.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.LstLog.Location = new System.Drawing.Point(0, 0);
+			this.LstLog.MaxItemCount = 500;
+			this.LstLog.Name = "LstLog";
+			this.LstLog.Size = new System.Drawing.Size(979, 195);
+			this.LstLog.TabIndex = 4;
+			// 
+			// SplitVert
+			// 
+			this.SplitVert.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.SplitVert.Location = new System.Drawing.Point(0, 0);
+			this.SplitVert.Name = "SplitVert";
+			this.SplitVert.Orientation = System.Windows.Forms.Orientation.Horizontal;
+			// 
+			// SplitVert.Panel1
+			// 
+			this.SplitVert.Panel1.Controls.Add(this.SplitHoriz);
+			// 
+			// SplitVert.Panel2
+			// 
+			this.SplitVert.Panel2.Controls.Add(this.LstLog);
+			this.SplitVert.Size = new System.Drawing.Size(979, 695);
+			this.SplitVert.SplitterDistance = 496;
+			this.SplitVert.TabIndex = 1;
+			// 
+			// SplitHoriz
+			// 
+			this.SplitHoriz.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.SplitHoriz.Location = new System.Drawing.Point(0, 0);
+			this.SplitHoriz.Name = "SplitHoriz";
+			// 
+			// SplitHoriz.Panel1
+			// 
+			this.SplitHoriz.Panel1.Controls.Add(this.ExplorerLocal);
+			// 
+			// SplitHoriz.Panel2
+			// 
+			this.SplitHoriz.Panel2.Controls.Add(this.ExplorerRemote);
+			this.SplitHoriz.Size = new System.Drawing.Size(979, 496);
+			this.SplitHoriz.SplitterDistance = 492;
+			this.SplitHoriz.TabIndex = 0;
 			// 
 			// FlameTab
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.tableLayoutPanel1);
+			this.Controls.Add(this.SplitVert);
 			this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.Margin = new System.Windows.Forms.Padding(2);
 			this.Name = "FlameTab";
 			this.Size = new System.Drawing.Size(979, 695);
-			this.tableLayoutPanel1.ResumeLayout(false);
+			this.SplitVert.Panel1.ResumeLayout(false);
+			this.SplitVert.Panel2.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.SplitVert)).EndInit();
+			this.SplitVert.ResumeLayout(false);
+			this.SplitHoriz.Panel1.ResumeLayout(false);
+			this.SplitHoriz.Panel2.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.SplitHoriz)).EndInit();
+			this.SplitHoriz.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
 
 		#endregion
-
-		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-		private System.Windows.Forms.ListBox LstLog;
 		private LocalExplorer ExplorerLocal;
 		private RemoteExplorer ExplorerRemote;
+		private ColoredLog LstLog;
+		private System.Windows.Forms.SplitContainer SplitVert;
+		private System.Windows.Forms.SplitContainer SplitHoriz;
 	}
 }

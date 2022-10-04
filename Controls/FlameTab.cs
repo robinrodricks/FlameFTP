@@ -398,20 +398,32 @@ namespace FlameFTP.Controls {
 
 
 		private void OnManagerLog(FtpTraceLevel level, string text) {
-			LogItem(level, text);
-		}
 
-		private void LogItem(FtpTraceLevel level, string text) {
-			string texttoappend = text + Environment.NewLine;
-			LstLog.Items.Add(texttoappend);
-
-			while (LstLog.Items.Count >= 200) {
-				LstLog.Items.RemoveAt(0);
-
+			Color color;
+			if (text.StartsWith(">")) {
+				color = Color.White;
+			}
+			else if (text.StartsWith("Command:")) {
+				color = Color.Gold;
+			}
+			else if (text.StartsWith("Response:")) {
+				color = Color.SpringGreen;
+			}
+			else if (text.StartsWith("Status:")) {
+				color = Color.DarkTurquoise;
+			}
+			else if (text.StartsWith("Error:")) {
+				color = Color.Coral;
+			}
+			else {
+				color = Color.LightGray;
 			}
 
-			LstLog.SelectedIndex = LstLog.Items.Count - 1;
+			LstLog.AddItem(text, color, null);
 		}
+
+
+
 
 	}
 }
