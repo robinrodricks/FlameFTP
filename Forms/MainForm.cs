@@ -52,10 +52,10 @@ namespace FlameFTP.Forms {
 			// add a FlameTab within the TabPage to manage the connection
 			FlameTab tab = new FlameTab();
 			tab.SuspendLayout();
-			tab.Init(profile);
 			tab.Dock = DockStyle.Fill;
 			tabpage.Controls.Add(tab);
 			tab.ResumeLayout();
+			tab.Init(profile);
 		}
 
 		private void disconnectToolStripMenuItem_Click(object sender, EventArgs e) {
