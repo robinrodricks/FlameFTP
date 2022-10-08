@@ -2,11 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FlameFTP.Controls {
@@ -47,8 +44,8 @@ namespace FlameFTP.Controls {
 				LstLog.Items.RemoveAt(0);
 			}
 
-			LstLog.SelectedIndex = LstLog.Items.Count - 1;
-		}
+            LstLog.TopIndex = LstLog.Items.Count - 1;
+        }
 
 		private void LstLog_DrawItem(object sender, DrawItemEventArgs e) {
 
@@ -67,5 +64,34 @@ namespace FlameFTP.Controls {
 
 		}
 
+		private void tsmi_selectAll_Click(object sender, EventArgs e)
+		{
+            LstLog.BeginUpdate();
+
+            for (int i = 0; i < LstLog.Items.Count; i++)
+                LstLog.SetSelected(i, true);
+
+            LstLog.EndUpdate(); 
+			
+			LstLog.Focus();
+		}
+
+		private void tsmi_invertSelection_Click(object sender, EventArgs e)
+		{
+            LstLog.BeginUpdate();
+
+            for (int i = 0; i < LstLog.Items.Count; i++)
+				LstLog.SetSelected(i, !LstLog.GetSelected(i));
+			LstLog.EndUpdate();
+			LstLog.Focus();
+
+        }
+
+        private void tsmi_copy_Click(object sender, EventArgs e)
+		{
+            Clipboard.SetText(string.Join(Environment.NewLine, LstLog.SelectedItems.OfType<string>()));
+        }
+
 	}
 }
+
