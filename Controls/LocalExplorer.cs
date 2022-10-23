@@ -211,7 +211,7 @@ namespace FlameFTP.Controls {
 					ftpItemsList.Add(ftpListItem);
 				}
 			}
-			Manager.Uploadfiles(ftpItemsList);
+			Manager.UploadFiles(ftpItemsList);
 
 
 		}

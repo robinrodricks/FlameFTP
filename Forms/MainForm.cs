@@ -41,21 +41,38 @@ namespace FlameFTP.Forms {
 			
 		}
 
+		private List<FlameTab> GetOpenTabs() {
+			return TabHolderMain.TabPages.Cast<TabPage>().Select(t => t.Controls[0] as FlameTab).ToList();
+		}
+
 		private void NewConnectionTab(FtpServerProfile profile) {
 
 			// Create the new panel and add it to the tab
 			var tabpage = new TabPage();
 			tabpage.Text = profile.ToString() + "       ";
 			tabpage.Name = profile.ToString();
-			tabControl1.TabPages.Add(tabpage);
+			TabHolderMain.TabPages.Add(tabpage);
 
 			// add a FlameTab within the TabPage to manage the connection
 			FlameTab tab = new FlameTab();
+			tab.TabPage = tabpage;
 			tab.SuspendLayout();
 			tab.Dock = DockStyle.Fill;
 			tabpage.Controls.Add(tab);
 			tab.ResumeLayout();
+
+			// switch to that new tab
+			TabHolderMain.SelectedTab = tabpage;
+
+			// begin connection
 			tab.Init(profile);
+		}
+
+		private void DisconnectAll() {
+			var tabs = GetOpenTabs();
+			foreach (var tab in tabs) {
+				tab.Destroy();
+			}
 		}
 
 		private void disconnectToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -127,5 +144,8 @@ namespace FlameFTP.Forms {
 			NewConnectionTab(profile);
 		}
 
+		private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
+			DisconnectAll();
+		}
 	}
 }

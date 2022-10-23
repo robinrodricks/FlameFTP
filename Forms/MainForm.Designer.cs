@@ -28,7 +28,7 @@
 		private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-			this.tabControl1 = new System.Windows.Forms.TabControl();
+			this.TabHolderMain = new System.Windows.Forms.TabControl();
 			this.RibbonMain = new System.Windows.Forms.Ribbon();
 			this.ROBtnNewConn = new System.Windows.Forms.RibbonOrbMenuItem();
 			this.ROBtnGithub1 = new System.Windows.Forms.RibbonOrbMenuItem();
@@ -48,17 +48,17 @@
 			this.RBtnDelete = new System.Windows.Forms.RibbonButton();
 			this.SuspendLayout();
 			// 
-			// tabControl1
+			// TabHolderMain
 			// 
-			this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			this.TabHolderMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.tabControl1.Location = new System.Drawing.Point(7, 127);
-			this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
-			this.tabControl1.Name = "tabControl1";
-			this.tabControl1.SelectedIndex = 0;
-			this.tabControl1.Size = new System.Drawing.Size(1258, 607);
-			this.tabControl1.TabIndex = 2;
+			this.TabHolderMain.Location = new System.Drawing.Point(7, 127);
+			this.TabHolderMain.Margin = new System.Windows.Forms.Padding(2);
+			this.TabHolderMain.Name = "TabHolderMain";
+			this.TabHolderMain.SelectedIndex = 0;
+			this.TabHolderMain.Size = new System.Drawing.Size(1258, 607);
+			this.TabHolderMain.TabIndex = 2;
 			// 
 			// RibbonMain
 			// 
@@ -244,18 +244,19 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1269, 738);
 			this.Controls.Add(this.RibbonMain);
-			this.Controls.Add(this.tabControl1);
+			this.Controls.Add(this.TabHolderMain);
 			this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.KeyPreview = true;
 			this.Margin = new System.Windows.Forms.Padding(2);
 			this.Name = "MainForm";
 			this.Text = "FlameFTP";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
 			this.ResumeLayout(false);
 
 		}
 
 		#endregion
-		private System.Windows.Forms.TabControl tabControl1;
+		private System.Windows.Forms.TabControl TabHolderMain;
 		private System.Windows.Forms.Ribbon RibbonMain;
 		private System.Windows.Forms.RibbonTab RibbonTabHome;
 		private System.Windows.Forms.RibbonPanel ribbonPanel1;

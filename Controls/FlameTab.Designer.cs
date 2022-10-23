@@ -28,11 +28,12 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
+			this.SplitVert = new System.Windows.Forms.SplitContainer();
+			this.SplitHoriz = new System.Windows.Forms.SplitContainer();
+			this.LabelRemote = new System.Windows.Forms.Label();
 			this.ExplorerLocal = new FlameFTP.Controls.LocalExplorer();
 			this.ExplorerRemote = new FlameFTP.Controls.RemoteExplorer();
 			this.LstLog = new FlameFTP.Controls.ColoredLog(this.components);
-			this.SplitVert = new System.Windows.Forms.SplitContainer();
-			this.SplitHoriz = new System.Windows.Forms.SplitContainer();
 			((System.ComponentModel.ISupportInitialize)(this.SplitVert)).BeginInit();
 			this.SplitVert.Panel1.SuspendLayout();
 			this.SplitVert.Panel2.SuspendLayout();
@@ -42,35 +43,6 @@
 			this.SplitHoriz.Panel2.SuspendLayout();
 			this.SplitHoriz.SuspendLayout();
 			this.SuspendLayout();
-			// 
-			// ExplorerLocal
-			// 
-			this.ExplorerLocal.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.ExplorerLocal.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.ExplorerLocal.Location = new System.Drawing.Point(0, 0);
-			this.ExplorerLocal.Margin = new System.Windows.Forms.Padding(2);
-			this.ExplorerLocal.Name = "ExplorerLocal";
-			this.ExplorerLocal.Size = new System.Drawing.Size(492, 496);
-			this.ExplorerLocal.TabIndex = 2;
-			// 
-			// ExplorerRemote
-			// 
-			this.ExplorerRemote.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.ExplorerRemote.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.ExplorerRemote.Location = new System.Drawing.Point(0, 0);
-			this.ExplorerRemote.Margin = new System.Windows.Forms.Padding(2);
-			this.ExplorerRemote.Name = "ExplorerRemote";
-			this.ExplorerRemote.Size = new System.Drawing.Size(483, 496);
-			this.ExplorerRemote.TabIndex = 3;
-			// 
-			// LstLog
-			// 
-			this.LstLog.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.LstLog.Location = new System.Drawing.Point(0, 0);
-			this.LstLog.MaxItemCount = 500;
-			this.LstLog.Name = "LstLog";
-			this.LstLog.Size = new System.Drawing.Size(979, 195);
-			this.LstLog.TabIndex = 4;
 			// 
 			// SplitVert
 			// 
@@ -102,10 +74,55 @@
 			// 
 			// SplitHoriz.Panel2
 			// 
+			this.SplitHoriz.Panel2.Controls.Add(this.LabelRemote);
 			this.SplitHoriz.Panel2.Controls.Add(this.ExplorerRemote);
 			this.SplitHoriz.Size = new System.Drawing.Size(979, 496);
 			this.SplitHoriz.SplitterDistance = 492;
 			this.SplitHoriz.TabIndex = 0;
+			// 
+			// LabelRemote
+			// 
+			this.LabelRemote.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.LabelRemote.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.LabelRemote.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.LabelRemote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(11)))), ((int)(((byte)(255)))));
+			this.LabelRemote.Location = new System.Drawing.Point(0, 28);
+			this.LabelRemote.Name = "LabelRemote";
+			this.LabelRemote.Size = new System.Drawing.Size(483, 468);
+			this.LabelRemote.TabIndex = 4;
+			this.LabelRemote.Text = "?";
+			this.LabelRemote.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// ExplorerLocal
+			// 
+			this.ExplorerLocal.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.ExplorerLocal.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.ExplorerLocal.Location = new System.Drawing.Point(0, 0);
+			this.ExplorerLocal.Margin = new System.Windows.Forms.Padding(2);
+			this.ExplorerLocal.Name = "ExplorerLocal";
+			this.ExplorerLocal.Size = new System.Drawing.Size(492, 496);
+			this.ExplorerLocal.TabIndex = 2;
+			// 
+			// ExplorerRemote
+			// 
+			this.ExplorerRemote.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.ExplorerRemote.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.ExplorerRemote.Location = new System.Drawing.Point(0, 0);
+			this.ExplorerRemote.Margin = new System.Windows.Forms.Padding(2);
+			this.ExplorerRemote.Name = "ExplorerRemote";
+			this.ExplorerRemote.Size = new System.Drawing.Size(483, 496);
+			this.ExplorerRemote.TabIndex = 3;
+			// 
+			// LstLog
+			// 
+			this.LstLog.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.LstLog.Location = new System.Drawing.Point(0, 0);
+			this.LstLog.MaxItemCount = 500;
+			this.LstLog.Name = "LstLog";
+			this.LstLog.Size = new System.Drawing.Size(979, 195);
+			this.LstLog.TabIndex = 4;
 			// 
 			// FlameTab
 			// 
@@ -134,5 +151,6 @@
 		private ColoredLog LstLog;
 		private System.Windows.Forms.SplitContainer SplitVert;
 		private System.Windows.Forms.SplitContainer SplitHoriz;
+		private System.Windows.Forms.Label LabelRemote;
 	}
 }

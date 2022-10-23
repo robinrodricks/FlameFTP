@@ -34,6 +34,7 @@ namespace FlameFTP.Forms {
 			CbEncoding.DataSource = Enum.GetValues(typeof(FtpEncodingType));
 			CbDataTrans.DataSource = Enum.GetValues(typeof(FtpDataType));
 			CbDataConn.DataSource = Enum.GetValues(typeof(FtpDataConnectionType));
+			CbProxyType.DataSource = Enum.GetValues(typeof(FtpProxyType));
 
 			ReloadProfiles();
 		}
@@ -57,6 +58,11 @@ namespace FlameFTP.Forms {
 			CbEncoding.SelectedItem = profile.Encoding;
 			CbDataTrans.SelectedItem = profile.DataTransType;
 			CbDataConn.SelectedItem = profile.DataConnType;
+			CbProxy.Checked = profile.IsProxy;
+			TxtProxyHost.Text = profile.ProxyHost;
+			TxtProxyUser.Text = profile.ProxyUser;
+			TxtProxyPass.Text = profile.ProxyPass;
+			NumProxyPort.Value = profile.ProxyPort;
 		}
 		private void SaveToProfile(FtpServerProfile profile) {
 
@@ -72,6 +78,11 @@ namespace FlameFTP.Forms {
 			profile.Encoding = (FtpEncodingType)CbEncoding.SelectedItem;
 			profile.DataTransType = (FtpDataType)CbDataTrans.SelectedItem;
 			profile.DataConnType = (FtpDataConnectionType)CbDataConn.SelectedItem;
+			profile.IsProxy = CbProxy.Checked;
+			profile.ProxyHost = TxtProxyHost.Text;
+			profile.ProxyUser = TxtProxyUser.Text;
+			profile.ProxyPass = TxtProxyPass.Text;
+			profile.ProxyPort = Convert.ToInt32(NumProxyPort.Value);
 
 			// save settings
 			SettingsManager.Save();
@@ -107,8 +118,11 @@ namespace FlameFTP.Forms {
 		}
 
 		private void CbAuto_CheckedChanged(object sender, EventArgs e) {
-			GrpManual.Enabled = !CbAuto.Checked;
+			GrpConnection.Enabled = !CbAuto.Checked;
 		}
 
+		private void CbProxy_CheckedChanged(object sender, EventArgs e) {
+			GrpProxy.Enabled = CbProxy.Checked;
+		}
 	}
 }

@@ -8,7 +8,7 @@ using FluentFTP;
 
 namespace FlameFTP.Managers {
 	public class FtpManager {
-		private FtpClient Ftp;
+		private FtpClient Client;
 		public FtpServerProfile Profile { get; set; }
 		public string LocalPath;
 		private string _remotePath;
@@ -16,57 +16,93 @@ namespace FlameFTP.Managers {
 		//     Add a custom listener here to get events every time a message is logged.
 		public Action<FtpTraceLevel, string> Logger { get; set; }
 		public bool IsConnected { get; private set; }
+		public string ConnectionError;
 
 		public void Init() {
 			GetClient();
 		}
-
-		public string RemotePath {
-			get { return _remotePath; }
-			set {
-				_remotePath = value;
-
-				var client = GetClient();
-				client.SetWorkingDirectory(RemotePath);
+		public void Destroy() {
+			if (Client != null && Client.IsConnected) {
+				try {
+					Client.Disconnect();
+				}
+				catch (Exception ex) {
+				}
 			}
 		}
 
 		public FtpClient GetClient() {
 			try {
 
-				if (Ftp == null) {
-
-					// create client
-					Ftp = new FtpClient();
-
-					// add logger
-					Ftp.LegacyLogger = Logger;
+				if (Client == null) {
 
 					// configure client using profile
-					Profile.ConfigureClient(Ftp);
+					Client = Profile.CreateClient();
+
+					// add logger
+					Client.LegacyLogger = Logger;
+
 				}
 
-				if (Ftp.IsConnected == false) {
+				if (!Client.IsConnected) {
 					if (Profile.IsAuto) {
-						Ftp.AutoConnect();
+						Client.AutoConnect();
 					}
 					else {
-						Ftp.Connect();
+						Client.Connect();
 					}
 				}
-				IsConnected = true;
-				return Ftp;
+
+				if (!Client.IsConnected || !Client.IsAuthenticated) {
+					IsConnected = false;
+					ConnectionError = "Unknown error while connecting to server!";
+					Logger(FtpTraceLevel.Error, "Error:    " + ConnectionError);
+					return null;
+				}
+				else {
+					IsConnected = true;
+					ConnectionError = null;
+					return Client;
+				}
 			}
 			catch (Exception ex) {
-				Logger(FtpTraceLevel.Error, "Error:    Error connecting to server: " + ex.Message);
+				ConnectionError = "Error connecting to server: " + ex.Message;
+				Logger(FtpTraceLevel.Error, "Error:    " + ConnectionError);
+				Logger(FtpTraceLevel.Error, "Error:    Exception type: " + ex.GetType().Name);
 				IsConnected = false;
 			}
 			return null;
 		}
 
-		public List<FtpListItem> GetRemoteListViewItems() {
-			var client = GetClient();
+		public string RemotePath {
+			get { return _remotePath; }
+			set {
 
+				// connect to the server, only execute if connected
+				var client = GetClient();
+				if (IsConnected) {
+
+					// all FTP commands must have exceptions handled
+					try {
+
+						client.SetWorkingDirectory(RemotePath);
+
+					}
+					catch (Exception ex) {
+						Logger(FtpTraceLevel.Error, "Error:    Error navigating to directory: " + ex.Message);
+						return;
+					}
+					_remotePath = value;
+				}
+
+			}
+		}
+
+
+		public List<FtpListItem> GetRemoteListViewItems() {
+
+			// connect to the server, only execute if connected
+			var client = GetClient();
 			if (IsConnected) {
 
 				// get a list of files and directories in the "/htdocs" folder
@@ -82,10 +118,21 @@ namespace FlameFTP.Managers {
 			return new List<FtpListItem>();
 		}
 		public bool DownloadFile(string localPath, string remotePath) {
+
+			// connect to the server, only execute if connected
 			var client = GetClient();
 			if (IsConnected) {
-				var ok = client.DownloadFile(localPath, remotePath);
-				return ok == FtpStatus.Success || ok == FtpStatus.Skipped;
+
+				// all FTP commands must have exceptions handled
+				try {
+
+					var ok = client.DownloadFile(localPath, remotePath);
+					return ok == FtpStatus.Success || ok == FtpStatus.Skipped;
+
+				}
+				catch (Exception ex) {
+					Logger(FtpTraceLevel.Error, "Error:    Error downloading file: " + ex.Message);
+				}
 			}
 			return false;
 		}
@@ -101,8 +148,9 @@ namespace FlameFTP.Managers {
 			return "";
 		}
 
-		public void DownloadFiles(List<FtpListItem> ftpItemsList, string folderPath, string baseRemotePath) {
-			try {
+		public bool DownloadFiles(List<FtpListItem> ftpItemsList, string folderPath, string baseRemotePath) {
+
+			/*try {
 				var filetemp = Path.Combine(folderPath, "tempfile.tmp");
 				FileStream ewrr = File.Create(filetemp);
 				ewrr.Close();
@@ -111,93 +159,228 @@ namespace FlameFTP.Managers {
 			catch (Exception e) {
 				Console.WriteLine(e);
 				return;
-			}
+			}*/
 
+			// connect to the server, only execute if connected
 			var client = GetClient();
+			if (IsConnected) {
 
-			foreach (FtpListItem ftpListItem in ftpItemsList) {
+				// all FTP commands must have exceptions handled
+				try {
 
-				if (ftpListItem.Type == FtpObjectType.Directory) {
-					var newRootpath = folderPath;
 
-					var newfolderpath = ftpListItem.FullName.Replace(baseRemotePath, @"\");
-					var newDirectory = newRootpath + newfolderpath;
+					foreach (FtpListItem ftpListItem in ftpItemsList) {
 
-					LocalFileManager.CreateDirectory(newDirectory);
+						if (ftpListItem.Type == FtpObjectType.Directory) {
+							var newRootpath = folderPath;
+
+							var newfolderpath = ftpListItem.FullName.Replace(baseRemotePath, @"\");
+							var newDirectory = newRootpath + newfolderpath;
+
+							LocalFileManager.CreateDirectory(newDirectory);
+						}
+
+						if (ftpListItem.Type == FtpObjectType.File) {
+							var wd = ftpListItem.FullName.Replace(ftpListItem.Name, "");
+							client.SetWorkingDirectory(wd);
+
+							var newRootpath = folderPath;
+							string newFilePath = ftpListItem.FullName.Replace(baseRemotePath, "");
+
+							string newFilePath2 = newFilePath.Replace("/", "\\");
+							var newFileName = newRootpath + newFilePath2;
+							client.DownloadFile(newFileName, ftpListItem.Name);
+						}
+
+
+					}
+
+					return true;
+
 				}
-
-				if (ftpListItem.Type == FtpObjectType.File) {
-					var wd = ftpListItem.FullName.Replace(ftpListItem.Name, "");
-					client.SetWorkingDirectory(wd);
-
-					var newRootpath = folderPath;
-					string newFilePath = ftpListItem.FullName.Replace(baseRemotePath, "");
-
-					string newFilePath2 = newFilePath.Replace("/", "\\");
-					var newFileName = newRootpath + newFilePath2;
-					client.DownloadFile(newFileName, ftpListItem.Name);
+				catch (Exception ex) {
+					Logger(FtpTraceLevel.Error, "Error:    Error downloading files: " + ex.Message);
 				}
-
 
 			}
+
+			return false;
 		}
 
 		public bool UploadFile(string localPath, string remotePath) {
+
+			// connect to the server, only execute if connected
 			var client = GetClient();
-			var ok = client.UploadFile(localPath, remotePath);
-			return ok == FtpStatus.Success || ok == FtpStatus.Skipped;
+			if (IsConnected) {
+
+				// all FTP commands must have exceptions handled
+				try {
+
+					var ok = client.UploadFile(localPath, remotePath);
+					return ok == FtpStatus.Success || ok == FtpStatus.Skipped;
+
+				}
+				catch (Exception ex) {
+					Logger(FtpTraceLevel.Error, "Error:    Error uploading file: " + ex.Message);
+					return false;
+				}
+			}
+			return false;
 		}
 
-		public void Uploadfiles(List<FtpListItem> ftpItemsList) {
+		public bool UploadFiles(List<FtpListItem> ftpItemsList) {
 
-			//client.EnableThreadSafeDataConnections = true;
+			// connect to the server, only execute if connected
 			var client = GetClient();
+			if (IsConnected) {
 
+				// all FTP commands must have exceptions handled
+				try {
 
-			foreach (FtpListItem ftpListItem in ftpItemsList) {
-				var wd = Path.GetDirectoryName(ftpListItem.Name);
-				if (client.DirectoryExists(wd) == false) {
-					client.CreateDirectory(wd, true);
+					foreach (FtpListItem ftpListItem in ftpItemsList) {
+						var wd = Path.GetDirectoryName(ftpListItem.Name);
+						if (client.DirectoryExists(wd) == false) {
+							client.CreateDirectory(wd, true);
+						}
+						client.SetWorkingDirectory(wd);
+						//The full name is the local folder !!!
+						client.UploadFile(ftpListItem.FullName, ftpListItem.Name, FtpRemoteExists.Overwrite, true, FtpVerify.None);
+					}
+					return true;
+
 				}
-				client.SetWorkingDirectory(wd);
-				//The full name is the local folder !!!
-				client.UploadFile(ftpListItem.FullName, ftpListItem.Name, FtpRemoteExists.Overwrite, true, FtpVerify.None);
+				catch (Exception ex) {
+					Logger(FtpTraceLevel.Error, "Error:    Error uploading files: " + ex.Message);
+				}
+
 			}
+			return false;
 		}
 
 		public string GetWorkingDirectory() {
+
+			// connect to the server, only execute if connected
 			var client = GetClient();
-			return client.GetWorkingDirectory();
+			if (IsConnected) {
+
+				// all FTP commands must have exceptions handled
+				try {
+
+					return client.GetWorkingDirectory();
+
+				}
+				catch (Exception ex) {
+					Logger(FtpTraceLevel.Error, "Error:    Error getting the working directory: " + ex.Message);
+					return null;
+				}
+			}
+			return null;
 		}
 
-		public void CreateRemoteFolder(string remoteFolderName) {
+		public bool CreateRemoteFolder(string remoteFolderName) {
+
+			// connect to the server, only execute if connected
 			var client = GetClient();
-			client.CreateDirectory(remoteFolderName, true);
+			if (IsConnected) {
+
+				// all FTP commands must have exceptions handled
+				try {
+
+					client.CreateDirectory(remoteFolderName, true);
+					return true;
+
+				}
+				catch (Exception ex) {
+					Logger(FtpTraceLevel.Error, "Error:    Error creating folder: " + ex.Message);
+				}
+			}
+			return false;
 		}
 
-		public void DeleteRemoteFolder(string folderName) {
+		public bool DeleteRemoteFolder(string folderName) {
+
+			// connect to the server, only execute if connected
 			var client = GetClient();
-			client.DeleteDirectory(folderName);
-			client.SetWorkingDirectory("/");
+			if (IsConnected) {
+
+				// all FTP commands must have exceptions handled
+				try {
+
+					client.DeleteDirectory(folderName);
+
+					// TODO: Navigate to the parent folder, not the root folder
+					RemotePath = "/";
+					return true;
+
+				}
+				catch (Exception ex) {
+					Logger(FtpTraceLevel.Error, "Error:    Error deleting folder: " + ex.Message);
+				}
+			}
+			return false;
 		}
 
-		public void DeleteRemoteFile(string fileName) {
+		public bool DeleteRemoteFile(string fileName) {
+
+			// connect to the server, only execute if connected
 			var client = GetClient();
-			client.DeleteFile(fileName);
+			if (IsConnected) {
+
+				// all FTP commands must have exceptions handled
+				try {
+
+					client.DeleteFile(fileName);
+					return true;
+
+				}
+				catch (Exception ex) {
+					Logger(FtpTraceLevel.Error, "Error:    Error deleting file: " + ex.Message);
+				}
+			}
+			return false;
 		}
 
 
 		public FtpListItem[] GetRecursiveListing() {
+
+			// connect to the server, only execute if connected
 			var client = GetClient();
-			var listing = client.GetListing(client.GetWorkingDirectory(), FtpListOption.Recursive);
-			return listing;
+			if (IsConnected) {
+
+				// all FTP commands must have exceptions handled
+				try {
+
+					var listing = client.GetListing(client.GetWorkingDirectory(), FtpListOption.Recursive);
+					return listing;
+
+				}
+				catch (Exception ex) {
+					Logger(FtpTraceLevel.Error, "Error:    Error getting a recursive file listing: " + ex.Message);
+				}
+			}
+			return new FtpListItem[0];
 		}
 
-		public void SetWorkingDirectory(string remotepath) {
+		public bool SetWorkingDirectory(string remotepath) {
+
+			// connect to the server, only execute if connected
 			var client = GetClient();
-			client.SetWorkingDirectory(remotepath);
+			if (IsConnected) {
 
+				// all FTP commands must have exceptions handled
+				try {
 
+					client.SetWorkingDirectory(remotepath);
+					return true;
+
+				}
+				catch (Exception ex) {
+					Logger(FtpTraceLevel.Error, "Error:    Error setting the working directory: " + ex.Message);
+					return false;
+				}
+			}
+
+			return false;
 		}
 
 	}

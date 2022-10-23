@@ -86,6 +86,7 @@
     </Compile>
     <Compile Include="Controls\Model\LogItem.cs" />
     <Compile Include="Enums\FtpEncodingType.cs" />
+    <Compile Include="Enums\FtpProxyType.cs" />
     <Compile Include="Forms\FrmNewDirectory.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -21,9 +21,13 @@ namespace FlameFTP.Controls {
 
 
 		public string PanelName { get; set; }
+		public TabPage TabPage { get; set; }
 
 		public FlameTab() {
 			InitializeComponent();
+		}
+		public void Destroy() {
+			Manager?.Destroy();
 		}
 
 		public void Init(FtpServerProfile profile) {
@@ -38,18 +42,31 @@ namespace FlameFTP.Controls {
 			ExplorerLocal.Manager = Manager;
 			ExplorerRemote.Manager = Manager;
 
-			// Set up event handlers for explorer components
+			// if connected
 			if (Manager.IsConnected) {
+
+				// Set up event handlers for explorer components
 				ExplorerLocal.ListViewDragDropReceived += ExplorerLocal_ListViewDragDropReceived;
 				ExplorerLocal.TreeViewDragDropReceived += ExplorerLocal_TreeViewDragDropReceived;
 				ExplorerLocal.TreeViewUploadMenuReceived += ExplorerLocal_TreeViewUploadMenuReceived;
 				ExplorerRemote.ListViewDragDropReceived += ExplorerRemote_ListViewDragDropReceived;
 				ExplorerRemote.TreeViewDragDropReceived += ExplorerRemote_TreeViewDragDropReceived;
 				ExplorerRemote.TreeViewDownloadMenuReceived += ExplorerRemote_TreeViewDownloadMenuReceived;
+
+				// hide the full error
+				LabelRemote.Visible = false;
+
+				// get remote listing
+				ExplorerRemote.PopulateInitialRemoteListView();
+			}
+			else {
+
+				// show the full error
+				LabelRemote.Text = Manager.ConnectionError;
+				LabelRemote.Visible = true;
 			}
 
 			// load initial directory listings
-			ExplorerRemote.PopulateInitialRemoteListView();
 			ExplorerLocal.LoadLocalDrives();
 		}
 
@@ -167,7 +184,7 @@ namespace FlameFTP.Controls {
 			}
 
 			if (listItemsToLoad.Count > 0) {
-				Manager.Uploadfiles(listItemsToLoad);
+				Manager.UploadFiles(listItemsToLoad);
 
 				ExplorerRemote.RefreshRemoteListView(e.TargetTreeNode);
 			}
@@ -221,7 +238,7 @@ namespace FlameFTP.Controls {
 			}
 
 			if (listItemsToLoad.Count > 0) {
-				Manager.Uploadfiles(listItemsToLoad);
+				Manager.UploadFiles(listItemsToLoad);
 
 				ExplorerRemote.RefreshRemoteListView(e.TargetTreeNode);
 			}
@@ -339,7 +356,7 @@ namespace FlameFTP.Controls {
 			}
 
 			if (listItemsToLoad.Count > 0) {
-				Manager.Uploadfiles(listItemsToLoad);
+				Manager.UploadFiles(listItemsToLoad);
 
 				ExplorerRemote.RefreshRemoteListView(ExplorerRemote.SelectedNode);
 			}

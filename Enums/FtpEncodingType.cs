@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FlameFTP.Enums {
-	public enum FtpEncodingType {
+	public enum FtpEncodingType: int {
 
 		UTF8 = 0,
 		WindowsWestern = 1252,
